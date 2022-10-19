@@ -66,7 +66,10 @@ ui = navbarPage(
   tabPanel(title = "Home",
            fluidRow(
              column(width = 1),
-             column(width = 5, tags$h3("Visualising Fish and Environment representation"))
+             column(width = 9, 
+                    tags$h3("Fisheries & Environment at our Fingertips"),
+                    tags$hr()
+                    )
            ),
            fluidRow(
              column(width = 1),
@@ -79,14 +82,109 @@ ui = navbarPage(
                     tags$img(src='un_ocean_decade.jpg',height='263',width='350')
                     ),
              column(width = 3,
-                    tags$p("This decame of the ocean comes down with a slogan the science we want for the ocean we need! But we flip it a little bit and should read the information we want for the ocean we need, why. Because we are at the time of precedented generation of data than ever before. Data generated from sensors to satellite is enormous. "),
+                    tags$p("This decade of the ocean comes down with a slogan the science we want for the ocean we need! But we flip it a little bit and should read the information we want for the ocean we need, why. Because we are at the time of precedented generation of data than ever before. Data generated from sensors to satellite is enormous. "),
                     tags$img(src='SDG-logo.png',height='263',width='268')
+                    ),
+             column(width = 2,
+                    helpText("Click or scan this QRCODE to access a live link of the fishStats's GitHub Repository. A repository contain the source code, files and images used to develop this app"), tags$br(),
+                    tags$a(href='https://github.com/lugoga/fishstats', tags$img(src='fishstats_github.png',height='147',width='150')),
+                    tags$hr()
+             )
+           ),
+           fluidRow(
+             column(width = 1),
+             column(width = 8,
+                    tags$h4("What does the app do?"),
+                    tags$hr(),
+                    tags$p("This app demostrates how to generate, describe, visualize , analyse, model data and estimate fisheries stocks.")
                     )
            ),
-           fluidRow(),
-           fluidRow(),
+           fluidRow(
+             column(width = 1),
+             column(width = 3,
+                    tags$li("The first set of graphs focuses on gender balance, showing the relative proportion of explicitly Male and Female words within each sentence, and the words used within sentences which contained predominantly Male or predominantly Female words.")
+                    ),
+             column(width = 3,
+                    tags$li("The second set presents a Sentiment analyis, showing the different emotions detected in the text and the evolution of positive and negative emotions throughout the text. Once again, the graphs allow users to see how the Male and Female words in their text are tied to the emotions.")
+             ),
+             column(width = 3,
+                    tags$li("The third set presents a Topic analysis, showing the user how their words clustered together, and highlighting again where those topics were tied to words in predominantly Male or Female sentences.")
+             )
+           ),
+           fluidRow(
+             column(width = 1),
+             column(width = 8, 
+                    tags$h4("But, Why?"),
+                    tags$hr()
+                    )
+           ),
+           fluidRow(
+             column(width = 1),
+             column(width = 5,
+                    tags$p("The app was inspired by research into gender bias in preaching, and was created as a user-friendly tool for people writing speeches, sermons or other public addresses who wanted to reflect on potential biases in their texts. The graphs can all be interpreted intuitively, and are accompanied by clear explanatory text that does not require specialist knowledge.")
+                    )
+           ),
+           fluidRow(
+             column(width = 1),
+             column(width = 8, 
+                    tags$h4("What Resources were used to develop the app"),
+                    tags$hr()
+             )
+           ),
+           fluidRow(
+             column(width = 1),
+             column(width = 8,
+                    tags$b("National Bereau of Statistics: "), tags$a(href="https://www.nbs.go.tz/index.php/en/", "The housing and population censor and Basemaps layers,")," with additional information from the ",tags$a(href="https://worldpop.org/", "Open Spatial Demographic Data and Research."),tags$br(),
+                    tags$b("Ofisi ya Rais - Tawala za Mikoa na Serikali za Mitaa: "), tags$a(href="https://www.tamisemi.go.tz/", "Information and Communication page,"),tags$br(),
+                    tags$b("Tanzania Rural and Urban Roads Agency: "), tags$a(href="https://www.tarura.go.tz/", "News page"),tags$br(),
+                    tags$b("Tanzania Ports Authoity: "), tags$a(href="https://www.ports.go.tz/", "Bandari Kavu reports"),tags$br(),
+                    tags$b("Tanzania Telecommunications Corporation: "), "Mkongo wa Taif ", tags$a(href="https://www.ttcl.co.tz/", "GLaMOR Project"),tags$br(),
+                    tags$br()
+             )
+           ),
+           fluidRow(
+             column(width = 1),
+             column(width = 8, 
+                    tags$h4("Developers"),
+                    tags$hr()
+             )
+           ),
+           fluidRow(
+             column(width = 1),
+             column(width = 6,
+                    "Masumbuko Semba, The Nelson Mandela African Institution of Science and Technology",tags$br(),
+                    "Nyamisi Peter, University of Dar es Salaam",
+                    tags$br(),
+             )
+           ),
+           fluidRow(
+             column(width = 1),
+             column(width = 8, 
+                    tags$h4("Acknowlegements"),
+                    tags$hr(),
+                    tags$p("The app was inspired by research into gender bias in preaching, and was created as a user-friendly tool for people writing speeches, sermons or other public addresses who wanted to reflect on potential biases in their texts. The graphs can all be interpreted intuitively, and are accompanied by clear explanatory text that does not require specialist knowledge.")
+             )
+           ),
+           fluidRow(
+             column(width = 1),
+             column(width = 11,
+                    tags$br(),
+                    tags$img(src = "FAO_logo.svg.png", width = "113px", height = "115px"),
+                    tags$img(src = "coat.png", width = "100px", height = "115px"), 
+                    tags$img(src = "un_ocean_decade_logo.jpg", width = "107px", height = "115px"), 
+                    tags$img(src = "wiomsa.png", width = "177px", height = "115px"), 
+                    tags$img(src = "Tafiri-logo-recreated.png", width = "112px", height = "115px"), 
+                    tags$img(src = "dsfa.png", width = "102px", height = "115px"), 
+                    tags$img(src = "udsm.png", width = "109px", height = "115px"), 
+                    tags$img(src = "nmaist.png", width = "130px", height = "115px"), 
+                    tags$img(src = "gmes.png", width = "307px", height = "115px"),
+                    tags$br()
+             )
+           ),
            fluidRow()
            ),
+  tags$br(),
+  tags$br(),
   ## simulation panel----
     tabPanel(title = "Simulate",
            
