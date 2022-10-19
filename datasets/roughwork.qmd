@@ -1,0 +1,243 @@
+---
+title: "processing"
+format: html
+---
+
+```{r}
+require(tidyverse)
+require(sf)
+# require(terra)
+# require(tidyterra)
+require(tmap)
+require(magrittr)
+require(highcharter)
+require(plotly)
+require(leaflet)
+require(patchwork)
+require(ggpmisc)
+require(shiny)
+require(shinyWidgets)
+require(shinydashboard)
+require(shinyalert)
+require(ggpmisc)
+
+require(sizeMat)
+require(LBSPR)
+require(TropFishR)
+require(fishR)
+
+conflicted::conflict_prefer(name = "select", winner = "dplyr")
+
+theme_set(theme_bw(base_size = 11))
+```
+
+
+# Datasets
+## nile perch in lake Victoria
+
+```{r}
+np = vroom::vroom("lates_niloticus.csv")
+
+np = np %>% 
+  mutate(lon = lon_deg + lon_min/60, lat = (lat_deg+lat_min/60)*-1) %>% 
+  select(date, year, location, lon, lat,strata, mean_depth_m, tl_cm:swimbladder_length_cm)
+
+np.sf = np %>% 
+  distinct(location, .keep_all = TRUE) %>% 
+  st_as_sf(coords = c("lon", "lat"), crs = 4326)
+  
+np.sf %>% 
+  tm_shape(name = "sites") +
+  tm_markers(clustering = TRUE)
+```
+
+
+```{r}
+np %>%  skimr::skim()
+```
+
+
+
+```{r}
+summarstats = np %>% 
+  select(location, tl_cm, wt_g, strata) %>% 
+  group_by(location) %>% 
+ggpubr::get_summary_stats(type = "common") %>% 
+filter(variable == "tl_cm") %>% 
+  ungroup()
+
+
+summarstats %>% 
+  mutate(colorGroup = if_else(n < 30, "Poor", "Good"))%>% 
+  sample_n(size = 60) %>%
+  arrange(-n) %>%
+  hchart(type = "bar", 
+         hcaes(x = location, y = n, color = c(Good = "#1D681F", Poor = "#FF0000")[colorGroup])) %>% 
+    hc_xAxis(title = list(text = ""), gridLineWidth = 0, minorGridLineWidth = 0) %>%
+    hc_yAxis(title = list(text = "Sample size"), gridLineWidth = 0, minorGridLineWidth = 0) %>%
+    hc_legend(enabled = FALSE) %>%
+    hc_tooltip(pointFormat = "Sample: <b>{point.y}</b>") %>%
+    hc_plotOptions(series = list(cursor = "default")) %>%
+    hc_add_theme(hc_theme_smpl()) %>%
+    hc_chart(backgroundColor = "transparent")
+```
+
+
+```{r}
+np %>% 
+  filter(location %in% c("Mbugwe Island", "Mori Bay")& tl_cm > 4 & tl_cm < 60) %>%
+  hchart(type = "point", hcaes(x = tl_cm, y = wt_g))%>% 
+    hc_xAxis(title = list(text = ""), gridLineWidth = 0, minorGridLineWidth = 0) %>%
+    hc_yAxis(title = list(text = "Sample size"), gridLineWidth = 0, minorGridLineWidth = 0) %>%
+    hc_legend(enabled = FALSE) %>%
+    hc_tooltip(pointFormat = "Sample: <b>{point.y}</b>") %>%
+    hc_plotOptions(series = list(cursor = "default")) %>%
+    hc_add_theme(hc_theme_smpl()) %>%
+    hc_chart(backgroundColor = "transparent")
+
+
+aa =np %>% 
+  filter(location %in% c("Mbugwe Island", "Mori Bay")& tl_cm > 4 & tl_cm < 60) %>% 
+  ggplot(aes(x = tl_cm, y = wt_g, color = location))+
+  geom_jitter()+
+  geom_smooth(method = "lm", formula = y~poly(x, 3))+  
+  labs(x = "Length (cm)", y = "Weight (g)")+
+  stat_correlation(mapping = aes(label = paste(after_stat(cor.label),
+                                               # after_stat(t.value.label),
+                                               after_stat(p.value.label),
+                                               after_stat(n.label),
+                                               sep = '*"; "*')))+
+  scale_color_manual(values = c("darkorange", "cyan4"))+
+  theme(legend.position = "none")
+
+
+
+bb = np %>% 
+  filter(location %in% c("Mbugwe Island", "Mori Bay")& tl_cm > 4 & tl_cm < 60) %>% 
+  ggplot(aes(x = tl_cm, y = wt_g, color = location))+
+  geom_jitter()+
+  geom_smooth(method = "lm", formula = y~poly(x, 3))+
+  scale_x_continuous(trans = scales::log10_trans())+
+  scale_y_continuous(trans = scales::log10_trans())+
+  labs(x = "Length (cm)", y = "Weight (g)")+
+  stat_correlation(mapping = aes(label = paste(after_stat(cor.label),
+                                               # after_stat(t.value.label),
+                                               after_stat(p.value.label),
+                                               after_stat(n.label),
+                                               sep = '*"; "*')))+
+  scale_color_manual(values = c("darkorange", "cyan4"))+
+  theme(legend.position = "none")
+aa + bb
+
+```
+
+## Stock Assessment
+
+
+```{r}
+ln.stock = np %>% 
+  mutate(month = lubridate::month(date, label = FALSE),
+         new_date = lubridate::make_date(year = 2021, month = month)) %>% 
+  filter(tl_cm < 100) %>% 
+  relocate(new_date, .after = date)
+
+```
+
+### Gonal Maturity
+```{r}
+
+ln_l50 = ln.stock %>% 
+  filter(year == "2018") %>%
+  gonad_mature(varNames = c("tl_cm", "maturity"), 
+               inmName = c("I","II"),
+               matName = c("III","IV","V","VI"), 
+               method = "fq", niter = 50)
+
+
+ln_l50 %>% print()
+
+# par(mfrow = c(2,2))
+
+ln_l50 %>% 
+  plot(xlab = "Total length (cm.)", 
+       ylab = "Proportion mature", 
+       col = c("blue", "red"), 
+       onlyOgive = TRUE, 
+       las= 1)
+```
+
+
+## Morphometric Maturity
+
+
+
+```{r}
+
+
+
+classify = ln.stock %>% 
+  filter(year == "2018" & tl_cm < 80) %>%
+  classify_mature(varNames = c("tl_cm", "wt_g"), 
+               method = "ld")
+
+
+classify %>% print()
+classify %>% plot()
+
+ln_l50m = morph_mature(data = classify, method = "fq")
+
+
+ln_l50m %>% 
+  plot(xlab = "Total length (cm.)", 
+       ylab = "Proportion mature", 
+       col = c("blue", "red"), 
+       onlyOgive = TRUE, 
+       las= 1)
+
+```
+
+```{r}
+
+
+freq = np %>% 
+  filter(year == 2018) 
+
+freq %>% 
+  ggplot() +
+  geom_freqpoly(aes(x = tl_cm), bins = 50)+
+  # scale_x_log10()+
+  scale_x_continuous(trans = scales::log2_trans()) +
+  scale_y_continuous(limits = c(0,50), expand = c(0,NA))+
+  geom_vline(xintercept = 45.2, linetype = 2, color = "red")+
+  geom_vline(xintercept = 51, linetype = 1, color = "blue")+
+  # facet_wrap(~year)+
+  labs(x = "Total length (cm)", y = "Frequency")+
+  theme(strip.background = element_blank())+
+  theme(panel.grid.minor = element_blank())
+
+freq %>% 
+  mutate(group = if_else(tl_cm >= 50, "Adult", "Juvenile")) %>% 
+  group_by(group) %>% 
+  tally() %>% 
+  # hchart(type = "pie", hcaes(x = group, y = n)) %>% 
+  plot_ly(type = "pie", labels = ~group, values = ~n, hole = .4) %>% 
+  plotly::layout(title = "Donut charts using Plotly", 
+         showlegend = F,
+         xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+
+```
+
+
+```{r}
+np  %>% 
+  group_by(location) %>% 
+  summarise(n = n()) %>% 
+  filter(n >= 40) %>% 
+  plot_ly(type = "pie", labels = ~location, values = ~n, hole = .4) %>% 
+  plotly::layout(title = "Donut charts using Plotly", 
+         showlegend = F,
+         xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+```
+
