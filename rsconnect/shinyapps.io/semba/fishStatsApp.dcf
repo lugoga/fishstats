@@ -1,0 +1,14 @@
+name: fishStatsApp
+title: fishStatsApp
+username:
+account: semba
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 7377170
+bundleId: 6426676
+url: https://semba.shinyapps.io/fishStatsApp/
+when: 1666353417.44298
+lastSyncTime: 1666353417.44298
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: app_bootrastrap.R|datasets/roughwork.qmd|meta.html|README.md

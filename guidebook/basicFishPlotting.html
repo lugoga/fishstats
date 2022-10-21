@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>WIO-fish - 9&nbsp; Plotting Fisheries Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./simulate.html" rel="next">
+<link href="./basicFishStats.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Plotting Fisheries Data</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./" class="sidebar-logo-link">
+      <img src="./FAO_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">WIO-fish</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/lugoga/ecasData" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rstudio.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started with R and RStudio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Rlanguage.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">R as a Programming Language</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./packages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Packages</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Entry and Management</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./loadingData.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Loading Data and Data Cleaning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sample.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sample Data in R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicFishStats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Basic Fisheries Statistics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicFishPlotting.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Plotting Fisheries Data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./simulate.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simulate Data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./installR.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">R language installation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./installRstudio.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title"><strong>What is RStudio?</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./installPackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Install packages in R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lw.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title"><strong>Weight-Length Relationships</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicstats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title"><strong>Basic Data Manipulations</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./recruitment.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Recruitment and logistic model</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#plotting-landings" id="toc-plotting-landings" class="nav-link active" data-scroll-target="#plotting-landings"> <span class="header-section-number">9.1</span> Plotting Landings</a></li>
+  <li><a href="#plotting-cpue" id="toc-plotting-cpue" class="nav-link" data-scroll-target="#plotting-cpue"> <span class="header-section-number">9.2</span> Plotting CPUE</a></li>
+  <li><a href="#plotting-length-frequency" id="toc-plotting-length-frequency" class="nav-link" data-scroll-target="#plotting-length-frequency"> <span class="header-section-number">9.3</span> Plotting Length Frequency</a></li>
+  <li><a href="#helpful-resources" id="toc-helpful-resources" class="nav-link" data-scroll-target="#helpful-resources"> <span class="header-section-number">9.4</span> Helpful Resources</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Plotting Fisheries Data</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>This document will now walk you through how to make make some basic fisheries plots using the data frames you created in the previous analysis section and the <code>ggplot</code> plotting function. When using <code>ggplot</code>, first start with your data frame and initialize the ggplot by specifying the plot’s <em>aesthetics</em> (variables) using <code>aes()</code>. Then use the <code>+</code> operation to add at least one <em>geometry</em> (type of plot, such as a scatter plot) and any additional features to the plot. To learn more about <code>ggplot</code>, the <a href="https://www.rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf">Data Visualization with ggplot2 Cheat Sheet</a> is a very helpful resource, as is this <a href="http://www.cookbook-r.com/Graphs/">ggplot cookbook</a>.</p>
+<section id="plotting-landings" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="plotting-landings"><span class="header-section-number">9.1</span> Plotting Landings</h2>
+<p>Let’s plot a time series of annual landings data. We start with the annual landings data we made in the previous step, and then feed this into a ggplot.</p>
+<pre><code># Start with the annual_landings data frame you created in the last step
+annual_landings %&gt;%
+  # Initialize a ggplot of annual landings versus year
+  ggplot(aes(x=Year,y=Annual_Landings_kg)) +
+  # Tell ggplot that the plot type should be a scatter plot
+  geom_point() +
+  # Also add a line connecting the points
+  geom_line() + 
+  # Change the y-axis title
+  ylab("Annual Landings [kg/year]") + 
+  # Add figure title
+  ggtitle("Annual landings of Caesio cuning") </code></pre>
+<p><img src="https://sfg-ucsb.github.io/fishery-manageR/r-fisheries-introduction_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid"></p>
+<p>In this example, we are using <code>aes(x=Year, y=Annual_Landings_kg)</code> to specify that the we want to plot years on the x-axis and annual landings on the y-axis. We then want to visualize these variables with both a scatter plot (<code>geom_point()</code>) <em>and</em> a line plot (<code>geom_line()</code>) geometry.</p>
+<p>It appears landings were going down between 2004 and 2011, but have been increasing since then. Again, you may be interested in looking across different gear types. To plot, we use ggplot’s faceting functionality, which tells <code>ggplot</code> to divide up the data by a certain variable, <code>Gear</code> in this case, and make multiple similar plots. You can use the <code>facet_wrap()</code> function to accomplish this.</p>
+<pre><code># Start with the landings data frame
+annual_gear_landings %&gt;% 
+  # First, group the data by year
+  group_by(Year,Gear) %&gt;% 
+  # Initialize a ggplot of annual landings versus year
+  ggplot(aes(x=Year,y=Annual_Landings_kg)) +
+  # Tell ggplot that the plot type should be a scatter plot
+  geom_point() +
+  # Also add a line connecting the points
+  geom_line() + 
+  # Change the y-axis title
+  ylab("Normalized annual Landings [kg/year]") + 
+  # Add figure title
+  ggtitle("Normalized annual landings of Caesio cuning") +
+  # This tells the figure to plot by all different gear types
+  facet_wrap(~Gear) </code></pre>
+<p><img src="https://sfg-ucsb.github.io/fishery-manageR/r-fisheries-introduction_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid"></p>
+<p>It now becomes clear that the recent increase in catch seems to be concentrated in speargun and trap fishing. Meanwhile, catch from muroami, a very destructive type of gear where nets are driven into the reef, has dropped to 0 since a ban of that gear in 2012 - a good sign that management regulation is working.</p>
+</section>
+<section id="plotting-cpue" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="plotting-cpue"><span class="header-section-number">9.2</span> Plotting CPUE</h2>
+<p>You may also be interested in plotting median catch-per-unit-effort (CPUE). You take your CPUE data frame made in the last step and feed it into ggplot.</p>
+<pre><code># Start with the CPUE data frame
+cpue_data %&gt;% 
+  # Initialize a ggplot of median CPUE versus year
+  ggplot(aes(x=Year,y=Median_CPUE_kg_hour)) +
+  # Tell ggplot that the plot type should be a scatter plot
+  geom_point() +
+  # Also add a line connecting the points
+  geom_line() + 
+  # Change the y-axis title
+  ylab("Median CPUE [kg/hour]") + 
+  # Add figure title
+  ggtitle("Median CPUE for Caesio cuning") </code></pre>
+<p><img src="https://sfg-ucsb.github.io/fishery-manageR/r-fisheries-introduction_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid"></p>
+<p>CPUE appears to have increased significantly during the last years. This may be due to increasing abundance in the water, which would be a good thing, but may also be indicative of increased gear efficiency coinciding with the transition to traps and spearguns, which may be concerning.</p>
+</section>
+<section id="plotting-length-frequency" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="plotting-length-frequency"><span class="header-section-number">9.3</span> Plotting Length Frequency</h2>
+<p>Finally, let’s first look at the length data from the catch, which gives an indication of the size structure and health of the population. Let’s look at the length data for 2014, which is the most recent year of data available. We first filter the data to be only from 2014 using the <code>filter()</code> function. We then create a histogram of the length data, which shows how many individuals of each size class were measured in the catch. On the histogram, we’ll also add a vertical line to show the length at which fish mature to get a sense of how sustainable the catch is - the catch should be composed mostly of mature fish. This information comes from the life history parameter data input file.</p>
+<pre><code># Start with the landings data frame
+landings_data %&gt;% 
+  # Filter data to only look at length measurements from 2014
+  filter(Year == 2014) %&gt;% 
+  # Initialize ggplot of data using the length column
+  ggplot(aes(Length_cm)) + 
+  # Tell ggplot that the plot type should be a histogram
+  geom_histogram() + 
+  # Change x-axis label
+  xlab("Length [cm]") + 
+  # Add figure title
+  ggtitle("Length histogram of Caesio cuning in the catch\nLength at 95% maturity shown as a red line.") + 
+  # Add a red vertical line for m95, the length at which 95% of fish are mature. Any fish below this length may be immature. Use the m95 value defined in the previous section
+  geom_vline(aes(xintercept=m95),color="red") </code></pre>
+<p><img src="https://sfg-ucsb.github.io/fishery-manageR/r-fisheries-introduction_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid"></p>
+<p>You might also be interested in seeing how the size composition varies by gear type. You can recreate the figure above, but separate the histograms out by gear type using ggplot’s “facet” function.</p>
+<pre><code># Start with the landings data frame
+landings_data %&gt;% 
+  # Filter data to only look at length measurements from 2014
+  filter(Year == 2014) %&gt;% 
+  # Initialize ggplot of data using the length column
+  ggplot(aes(Length_cm)) + 
+  # Tell ggplot that the plot type should be a histogram
+  geom_histogram() + 
+  # Change x-axis label
+  xlab("Length [cm]") + 
+  # Add figure title
+  ggtitle("Length histogram of Caesio cuning in the catch by gear type\nLength at 95% maturity shown as a red line.") + 
+  # Add a red line for m95, the length at which 95% of fish are mature. Any fish below this length may be immature. Use the life_history_parameter data frame to get this value.
+  geom_vline(aes(xintercept=m95),color="red") + 
+  # This tells the figure to plot by all different gear types, known as facetting
+  facet_wrap(~Gear) </code></pre>
+<p><img src="https://sfg-ucsb.github.io/fishery-manageR/r-fisheries-introduction_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid"></p>
+<p>It appears as if the size structure is about the same from each gear, although by far the most amount of fish are caught using speargun. Very few fish are caught using trolling.</p>
+<p>These plots indicate a generally increasing catch, CPUE, and a healthy size structure. Our results demonstrate that the population is likely doing fairly well, and may be recovering since the 2012 ban of muroami fishing gear.</p>
+</section>
+<section id="helpful-resources" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="helpful-resources"><span class="header-section-number">9.4</span> Helpful Resources</h2>
+<ul>
+<li><p><a href="https://www.rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf">Data Visualization with ggplot2 Cheat Sheet</a></p></li>
+<li><p><a href="http://www.cookbook-r.com/Graphs/">ggplot cookbook</a></p></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./basicFishStats.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Basic Fisheries Statistics</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./simulate.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simulate Data</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

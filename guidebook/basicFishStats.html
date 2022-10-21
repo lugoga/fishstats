@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>WIO-fish - 8&nbsp; Basic Fisheries Statistics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./basicFishPlotting.html" rel="next">
+<link href="./sample.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Basic Fisheries Statistics</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./" class="sidebar-logo-link">
+      <img src="./FAO_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">WIO-fish</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/lugoga/ecasData" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rstudio.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started with R and RStudio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Rlanguage.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">R as a Programming Language</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./packages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Packages</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Entry and Management</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./loadingData.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Loading Data and Data Cleaning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sample.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sample Data in R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicFishStats.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Basic Fisheries Statistics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicFishPlotting.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Plotting Fisheries Data</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./simulate.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simulate Data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./installR.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">R language installation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./installRstudio.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title"><strong>What is RStudio?</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./installPackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Install packages in R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lw.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title"><strong>Weight-Length Relationships</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicstats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title"><strong>Basic Data Manipulations</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./recruitment.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Recruitment and logistic model</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#calculating-landings" id="toc-calculating-landings" class="nav-link active" data-scroll-target="#calculating-landings"> <span class="header-section-number">8.1</span> Calculating Landings</a></li>
+  <li><a href="#calculating-catch-per-unit-effort-cpue" id="toc-calculating-catch-per-unit-effort-cpue" class="nav-link" data-scroll-target="#calculating-catch-per-unit-effort-cpue"> <span class="header-section-number">8.2</span> Calculating Catch-per-Unit-Effort (CPUE)</a></li>
+  <li><a href="#calculating-percent-mature" id="toc-calculating-percent-mature" class="nav-link" data-scroll-target="#calculating-percent-mature"> <span class="header-section-number">8.3</span> Calculating Percent Mature</a></li>
+  <li><a href="#helpful-resources" id="toc-helpful-resources" class="nav-link" data-scroll-target="#helpful-resources"> <span class="header-section-number">8.4</span> Helpful Resources</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Basic Fisheries Statistics</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="calculating-landings" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="calculating-landings"><span class="header-section-number">8.1</span> Calculating Landings</h2>
+<p>One of the first analyses you may be interested in is calculating annual landings in the fishery. To calculate annual landings, take your <code>landings_data</code> data frame, add a column for weight of individual fish in kilograms by using the <code>mutate</code> function, group the data by year by using the <code>group_by</code> function, and then summarize the data for each year by summing the total weight of all fish caught in each year using the <code>summarize</code> and <code>sum</code> functions.</p>
+<pre><code># Start with the landings data frame
+annual_landings &lt;- landings_data %&gt;% 
+  # Add colomn for kilograms by dividing gram column by 1000
+  mutate(Weight_kg = Weight_g / 1000) %&gt;%
+  # Group the data by year
+  group_by(Year) %&gt;% 
+  # Next, summarize the total annual landings per year
+  summarize(Annual_Landings_kg = sum(Weight_kg,na.rm=TRUE))
+
+## Display a table of the annual landings data
+annual_landings
+
+## # A tibble: 9 x 2
+##    Year Annual_Landings_kg
+##   &lt;int&gt;              &lt;dbl&gt;
+## 1  2003          310.40914
+## 2  2004          565.30807
+## 3  2005          163.24191
+## 4  2006           37.11914
+## 5  2010          131.84178
+## 6  2011          156.77825
+## 7  2012          101.53198
+## 8  2013          579.52008
+## 9  2014         1193.75519</code></pre>
+<p>Note the use of <code>na.rm = TRUE</code> in the code above. This is an important <strong>argument</strong> of many R functions (<code>sum()</code> in this case) and it tells R what to do with <code>NA</code> values in your data. Here, we are telling R to first remove <code>NA</code> values before calculating the sum of the <code>Weight_kg</code> variable. By default, many functions will return <code>NA</code> if <strong>any</strong> value is <code>NA</code>, which is often not desirable.</p>
+<p>You may be interested in looking at landings across different gear types. Here, we now group the data frame by both the year and the gear type in order to summarize the total landings by year and by gear.</p>
+<pre><code># Start with the landings data frame
+annual_gear_landings &lt;- landings_data %&gt;% 
+  # Add colomn for kilograms by dividing gram column by 1000
+  mutate(Weight_kg = Weight_g / 1000) %&gt;%
+  # Group the data by year and gear type
+  group_by(Year,Gear) %&gt;% 
+  # Next, summarize the total annual landings per year and gear type
+  summarize(Annual_Landings_kg = sum(Weight_kg,na.rm=TRUE))
+
+## Display a table of the annual landings data by gear type
+annual_gear_landings
+
+## # A tibble: 39 x 3
+## # Groups:   Year [?]
+##     Year     Gear Annual_Landings_kg
+##    &lt;int&gt;    &lt;chr&gt;              &lt;dbl&gt;
+##  1  2003  gillnet          13.413401
+##  2  2003 handline           2.874861
+##  3  2003  muroami         247.879049
+##  4  2003     trap          46.241825
+##  5  2004  gillnet           4.189301
+##  6  2004 handline          57.705893
+##  7  2004  muroami         370.866460
+##  8  2004 speargun           9.476406
+##  9  2004     trap         118.683464
+## 10  2004 trolling           4.386547
+## # ... with 29 more rows</code></pre>
+</section>
+<section id="calculating-catch-per-unit-effort-cpue" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="calculating-catch-per-unit-effort-cpue"><span class="header-section-number">8.2</span> Calculating Catch-per-Unit-Effort (CPUE)</h2>
+<p>You may also be interested in calculating catch-per-unit-effort (CPUE). CPUE is calculated by dividing the catch of each fishing trip by the number of hours fished during that trip. This gives CPUE in units of kilograms per hour. The median for every year is then calculated in order to remove outliers - some fishers are much more efficient than others.</p>
+<pre><code># Start with the landings data frame
+cpue_data &lt;- landings_data %&gt;% 
+  # Add colomn for kilograms by dividing gram column by 1000
+  mutate(Weight_kg = Weight_g / 1000) %&gt;%
+  # Group by year and Trip ID so that you can calculate CPUE for every trip in every year
+  group_by(Year,Trip_ID) %&gt;% 
+  # For each year and trip ID, calculate the CPUE for each trip by dividing the sum of the catch, converted from grams to kilograms, by the trip by the number of fishing hours
+  summarize(Trip_CPUE = sum(Weight_kg) / mean(Effort_Hours)) %&gt;% 
+  # Next, just group by year so we can calculate median CPUE for each year across all trips in the year
+  group_by(Year) %&gt;% 
+  # Calculate median CPUE for each year
+  summarize(Median_CPUE_kg_hour = median(Trip_CPUE))
+
+# Display a table of the CPUE data
+cpue_data
+
+## # A tibble: 9 x 2
+##    Year Median_CPUE_kg_hour
+##   &lt;int&gt;               &lt;dbl&gt;
+## 1  2003          0.31834277
+## 2  2004          0.26233292
+## 3  2005          0.40145105
+## 4  2006          0.44029501
+## 5  2010          0.01742840
+## 6  2011          0.03123217
+## 7  2012          0.03123217
+## 8  2013          0.19638408
+## 9  2014          0.88216281</code></pre>
+</section>
+<section id="calculating-percent-mature" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="calculating-percent-mature"><span class="header-section-number">8.3</span> Calculating Percent Mature</h2>
+<p>You may also wish to analyze your length data. One analysis would be to determine the percentage of mature fish in the catch in every year of the data frame. First let's define <code>m95</code>, the length at which 95% of fish are mature. For <em>Caesio cuning</em>, we know this is 15.9cm. Next, let's add a column to the data frame using the <code>mutate</code> function that represents whether each fish is mature or not (represented by a <code>TRUE</code> or <code>FALSE</code>), group the data frame by year, and then summarize for each year the percentage of mature fish out of the total number of sampled fish.</p>
+<pre><code># Define m95, the length at which 95% of fish are mature
+m95 = 15.9
+
+# Start with the landings data frame
+landings_data %&gt;% 
+  # Add a column to the data that indicates whether each length measurement is from a mature or immature fish. If it's mature, this value should be TRUE; if immature, FALSE.
+  mutate(Mature = Length_cm &gt; m95) %&gt;% 
+  # Group by year so we can see the percent mature for every year
+  group_by(Year) %&gt;% 
+  # The percentage mature is equal to the  number of mature fish divided by the total number of fish and multiplied by 100
+  summarize(Percent_Mature = sum(Mature) / n() * 100) 
+
+## # A tibble: 9 x 2
+##    Year Percent_Mature
+##   &lt;int&gt;          &lt;dbl&gt;
+## 1  2003       98.56916
+## 2  2004       98.62188
+## 3  2005       97.73371
+## 4  2006      100.00000
+## 5  2010       91.80556
+## 6  2011       99.77629
+## 7  2012       99.65398
+## 8  2013       99.46164
+## 9  2014       99.55665</code></pre>
+<p>Over 90% of the fish are mature throughout the time series, which is a great sign!</p>
+</section>
+<section id="helpful-resources" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="helpful-resources"><span class="header-section-number">8.4</span> Helpful Resources</h2>
+<ul>
+<li><a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data Wrangling with dplyr and tidyr Cheat Sheet</a> is a very helpful resource for learning how to <em>wrangle</em> (manipulate) data in R</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./sample.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sample Data in R</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./basicFishPlotting.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Plotting Fisheries Data</strong></span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

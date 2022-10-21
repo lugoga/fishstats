@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>fishStats - 7&nbsp; Sample Data in R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./basicFishStats.html" rel="next">
+<link href="./loadingData.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sample Data in R</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./" class="sidebar-logo-link">
+      <img src="./FAO_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">fishStats</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/lugoga/ecasData" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><strong>Installation</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Rlanguage.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>R as a Programming Language</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rstudio.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>Getting Started with RStudio</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./packages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><strong>Packages</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><strong>Data Entry and Management</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./loadingData.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><strong>Loading Data and Data Cleaning</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sample.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sample Data in R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicFishStats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>Basic Fisheries Statistics</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicFishPlotting.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Plotting Fisheries Data</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./simulate.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simulate Data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./installR.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">R language installation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./installRstudio.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title"><strong>What is RStudio?</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./installPackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Install packages in R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lw.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title"><strong>Weight-Length Relationships</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicstats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title"><strong>Basic Data Manipulations</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./recruitment.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Recruitment and logistic model</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#types-of-sampling" id="toc-types-of-sampling" class="nav-link active" data-scroll-target="#types-of-sampling"> <span class="header-section-number">7.1</span> Types of Sampling</a></li>
+  <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link" data-scroll-target="#descriptive-statistics"> <span class="header-section-number">7.2</span> Descriptive Statistics</a></li>
+  <li><a href="#categorical-variables" id="toc-categorical-variables" class="nav-link" data-scroll-target="#categorical-variables"> <span class="header-section-number">7.3</span> Categorical Variables</a></li>
+  <li><a href="#confidence-interval" id="toc-confidence-interval" class="nav-link" data-scroll-target="#confidence-interval"> <span class="header-section-number">7.4</span> Confidence Interval</a>
+  <ul class="collapse">
+  <li><a href="#standard-error" id="toc-standard-error" class="nav-link" data-scroll-target="#standard-error"> <span class="header-section-number">7.4.1</span> Standard Error</a></li>
+  </ul></li>
+  <li><a href="#confidence-intervals-for-means" id="toc-confidence-intervals-for-means" class="nav-link" data-scroll-target="#confidence-intervals-for-means"> <span class="header-section-number">7.5</span> Confidence Intervals For Means</a></li>
+  <li><a href="#confidence-intervals-for-proportions" id="toc-confidence-intervals-for-proportions" class="nav-link" data-scroll-target="#confidence-intervals-for-proportions"> <span class="header-section-number">7.6</span> Confidence Intervals for Proportions</a></li>
+  <li><a href="#confidence-interval-for-means" id="toc-confidence-interval-for-means" class="nav-link" data-scroll-target="#confidence-interval-for-means"> <span class="header-section-number">7.7</span> Confidence Interval for Means</a></li>
+  <li><a href="#confidence-interval-for-proportions" id="toc-confidence-interval-for-proportions" class="nav-link" data-scroll-target="#confidence-interval-for-proportions"> <span class="header-section-number">7.8</span> Confidence Interval for Proportions</a></li>
+  <li><a href="#how-big-a-sample-do-i-need-to-have-the-confidence-i-want" id="toc-how-big-a-sample-do-i-need-to-have-the-confidence-i-want" class="nav-link" data-scroll-target="#how-big-a-sample-do-i-need-to-have-the-confidence-i-want"> <span class="header-section-number">7.9</span> How Big a Sample Do I Need to Have the Confidence I Want?</a></li>
+  <li><a href="#calculations-in-excel" id="toc-calculations-in-excel" class="nav-link" data-scroll-target="#calculations-in-excel"> <span class="header-section-number">7.10</span> Calculations in Excel</a>
+  <ul class="collapse">
+  <li><a href="#confidence-interval-for-means-1" id="toc-confidence-interval-for-means-1" class="nav-link" data-scroll-target="#confidence-interval-for-means-1"> <span class="header-section-number">7.10.1</span> Confidence Interval for Means</a></li>
+  <li><a href="#confidence-interval-for-proportions-1" id="toc-confidence-interval-for-proportions-1" class="nav-link" data-scroll-target="#confidence-interval-for-proportions-1"> <span class="header-section-number">7.10.2</span> Confidence Interval for Proportions</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sample Data in R</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(magrittr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We rarely have complete data about something we want to know. For example, we often want to know who will win a political election, but we do not have the time to ask every potential voter who they plan to vote for. And people’s attitudes change during a campaign.</p>
+<p>However, it is possible to take get the opinion of a small number of people and make an estimate of the possible outcomes of the election.</p>
+<p>That small number of people is called a sample, and the estimate we make about the broader population is called an inference.</p>
+<ul>
+<li><p><strong>Descriptive statistics</strong> is the use of statistical techniques to describe data.</p></li>
+<li><p><strong>Inferential statistics</strong> is the use of statistical techniques to make inferences about a complete population based on a sample from that population.</p></li>
+</ul>
+<section id="types-of-sampling" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="types-of-sampling"><span class="header-section-number">7.1</span> Types of Sampling</h2>
+<p>The method used to determine what subset of people or things you base your inference on is called sampling.</p>
+<p>There are two broad types of sampling techniques, and a number of subtypes within those broad types.</p>
+<p><strong>Probability sampling</strong> is when any member of the target population has a known probability of being included in the sampled population. Such techniques include:</p>
+<ul>
+<li><p><strong>Simple random sampling</strong> involves randomly selecting members of the population. There is an equal probability that any member of the For example, a random number generator (like the Excel RAND() function) can be used to select a subset of numbers from a phone number list that covers the population. In the natural sciences, an example might be placing remote cameras at random locations in an area when trying to get a count of the population of a specific type of animal in that area</p></li>
+<li><p><strong>Systematic sampling</strong> involves selecting members from the target population at a regular interval. For example, every 10th number from a sorted list of addresses Stratified sampling involves taking random samples from different subgroups of the target population and then using known information about the size or characteristics of those subgroups to adjust the results. For example, if studying the opinions about college students toward a university policy, different classes (freshmen, sophomores, etc) or majors might have different opinions about that policy. Separating calculations into different sub-groups can be useful for discerning the differences between those groups Nonprobability sampling is used in cases where probability sampling is impractical. While you cannot use statistical techniques to make clear inferences about the broader population from these types of samples, descriptive results from these samples can offer suggestions of research paths that would justify the expense and difficulty of further probability sampling. Some common subtypes of nonprobability sampling include:</p></li>
+<li><p><strong>Convenience sampling</strong> involves sampling a group of people you can conveniently access. For example, American college students are some of the most studied populations in history. College students tend to be young and from a specific set of social classes, so they cannot be said to be a random sample of the broader population. However, college students are readily accessible to the academic researchers that are their professors, and they often are happy to be research subjects in exchange for pizza or other relatively small amounts of compensation</p></li>
+<li><p><strong>Purposive sampling</strong> is a variant on convenience sampling that is commonly used when information about a specific subgroup of the broader population is needed. For example, if information about the opinions of men are needed, volunteers might stand on a busy street corner and specifically target only men that pass by for further inquiry (and likely rejection)</p></li>
+<li><p><strong>Snowball sampling</strong> involves asking sampled subjects for recommendations of other people that might fit a specific profile. For example, if studying a relatively small ethnic group, asking a subject for a recommendation on friends and family members that might participate would make it easier to find other members of that ethnic group</p></li>
+</ul>
+</section>
+<section id="descriptive-statistics" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="descriptive-statistics"><span class="header-section-number">7.2</span> Descriptive Statistics</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>peng <span class="ot">=</span> palmerpenguins<span class="sc">::</span>penguins</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>peng <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 344
+Columns: 8
+$ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adel~
+$ island            &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torgersen, Torgerse~
+$ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34.1, ~
+$ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18.1, ~
+$ flipper_length_mm &lt;int&gt; 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 186~
+$ body_mass_g       &lt;int&gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475, ~
+$ sex               &lt;fct&gt; male, female, female, NA, female, male, female, male~
+$ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007~</code></pre>
+</div>
+</div>
+<p>The range() of values as well as the mean() and median() are standard descriptive statistics to run on any quantitative variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>peng <span class="sc">%&gt;%</span> <span class="fu">pull</span>(bill_length_mm) <span class="sc">%&gt;%</span> <span class="fu">range</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 32.1 59.6</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>peng <span class="sc">%&gt;%</span> <span class="fu">pull</span>(bill_length_mm) <span class="sc">%&gt;%</span> <span class="fu">mean</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 43.92193</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>peng <span class="sc">%&gt;%</span> <span class="fu">pull</span>(bill_length_mm) <span class="sc">%&gt;%</span> <span class="fu">median</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 44.45</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>peng <span class="sc">%&gt;%</span> <span class="fu">pull</span>(bill_length_mm) <span class="sc">%&gt;%</span> <span class="fu">sd</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.459584</code></pre>
+</div>
+</div>
+<p>The distribution of values across the range can be assessed with a histogram and/or density plot.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>peng <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm))<span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing non-finite values (stat_bin).</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-histogram" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="sample_files/figure-html/fig-histogram-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure 7.1: Distribution of bill length shown by histogram</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>peng <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm))<span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..count..))<span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">alpha =</span> .<span class="dv">2</span>, <span class="at">fill =</span> <span class="st">"darkorchid"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing non-finite values (stat_density).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing non-finite values (stat_bin).</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-density" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="sample_files/figure-html/fig-density-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure 7.2: Distribution of bill length shown by density</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="categorical-variables" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="categorical-variables"><span class="header-section-number">7.3</span> Categorical Variables</h2>
+<p>The table() function shows the counts of different values in a categorical variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>peng <span class="sc">%$%</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>(species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>species
+   Adelie Chinstrap    Gentoo 
+      152        68       124 </code></pre>
+</div>
+</div>
+<p>A table() can also be visualized as a barplot() with values converted to percents</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>peng <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-bar" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="sample_files/figure-html/fig-bar-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure 7.3: barplot of a categorical species of palmer penguins</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="confidence-interval" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="confidence-interval"><span class="header-section-number">7.4</span> Confidence Interval</h2>
+<p>If we sample a characteristic of a population that can be represented as a continuous variable, we can take the mean of that sample and get the sample mean. But how confident can we be that sample mean is anywhere close to the population mean?</p>
+<p>A curious and wondrous fact about random sampling is that if you take a sufficient number of random samples (usually 30 or more) from any kind of distribution (normal or not), the distribution of deviations (errors) between the sampled values and the population mean will be a normal distribution.</p>
+<p>This is the central limit theorem, which was originally proposed by French mathemetician Abraham de Moive in 1733 and later developed by French mathemetician Pierre-Simon Laplace in 1812 and Russian mathemetician Aleksandr Lyapunov in 1901.</p>
+<p>The implication of the central limit theorem is that you can use a standard deviation and the rules of probability to calculate confidence intervals and assess how reliable your sampling results are. The central limit theorem is one of the most important theorems in statistics.</p>
+<p>For example, within a normal distribution:</p>
+<ol type="1">
+<li>We know that around 68% of the values are within one standard deviation of the mean and we know that 99.7% of the values are within two standard deviations of the mean.</li>
+<li>Therefore, we can be 68% certain that our sample mean is within one standard deviation of the population, and 99.7% certain that our sample mean is within two standard deviations of the population.</li>
+</ol>
+<section id="standard-error" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="standard-error"><span class="header-section-number">7.4.1</span> Standard Error</h3>
+<p>Since our primary interest is is a potential amount of error between the sample mean and population mean, we can use the standard deviation of the sample and the size of the sample to calculate the standard error. The standard error is used to estimate how far your sampled data may differ from the population data.</p>
+<p>Standard error for a sample mean (x) is calculated as the standard deviation of the population (σ) divided by the square root of the sample size. The greater the sample size, the closer the sample mean can be assumed to get to the actual population mean.</p>
+<p><span class="math inline">\(\sigma \bar x = \frac{\sigma}{\sqrt{n}}\)</span></p>
+<p>Since we rarely know the standard deviation of the population (which is why we’re sampling in the first place) we estimate the standard error using the standard deviation of the sample (s):</p>
+<p><span class="math inline">\(\sigma \bar x = \frac{S}{\sqrt{n}}\)</span></p>
+</section>
+</section>
+<section id="confidence-intervals-for-means" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="confidence-intervals-for-means"><span class="header-section-number">7.5</span> Confidence Intervals For Means</h2>
+<p>The confidence level you want determines how many standard errors above or below the mean you are willing to accept. The most common confidence levels are 95% and 99% (Investopedia 2022).</p>
+<p>In a normal distribution, we know that 95% of the values (2.5 percentile to 97.5 percentile) are within 1.96 standard deviations (a z-score of ±1.96) above or below the mean.</p>
+<p>Accordingly, if we have a random sample, we can be 95% confident (confidence interval) that the actual population mean is within 1.96 standard errors above or below the sample mean (s).</p>
+<p><span class="math inline">\(d\pm1.96\times\sigma\bar x\)</span></p>
+<p>The confidence interval is sometimes described in terms of margin of error.</p>
+<ul>
+<li>The confidence interval is the whole range of values above and below the mean.</li>
+<li>The margin of error is the difference between the mean and the bottom or top of the confidence interval (z-score times standard error).</li>
+</ul>
+<p>Using the GPA data in the sample data above, the confidence interval based on standard error can be calculated in R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>bl  <span class="ot">=</span> peng <span class="sc">%&gt;%</span> <span class="fu">pull</span>(bill_length_mm)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">length</span>(bl)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>stderr <span class="ot">=</span> <span class="fu">sd</span>(bl, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>moe <span class="ot">=</span> <span class="fu">round</span>(<span class="fl">1.96</span> <span class="sc">*</span> stderr, <span class="dv">2</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"The margin of error is"</span>, moe))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The margin of error is 0.58"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>bl.mean <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(bl, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"The 95% confidence interval is"</span>, bl.mean <span class="sc">-</span> moe, <span class="st">" to "</span>,bl.mean <span class="sc">+</span> moe))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The 95% confidence interval is 43.34  to  44.5"</code></pre>
+</div>
+</div>
+<p>The MOE can be visualized with a semitransparent rect() around the mean line.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(bl, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">col=</span><span class="st">"navy"</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rect</span>(<span class="at">xleft =</span> bl.mean <span class="sc">-</span> moe, <span class="at">ybottom =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">xright =</span> bl.mean <span class="sc">+</span> moe, </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ytop =</span> <span class="dv">1</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">col=</span><span class="st">"#00000020"</span>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> bl.mean, <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">col=</span><span class="st">"darkred"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="sample_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="confidence-intervals-for-proportions" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="confidence-intervals-for-proportions"><span class="header-section-number">7.6</span> Confidence Intervals for Proportions</h2>
+<p>If your sample data is dichotomous (e.g.&nbsp;Mac vs PC), or categorical that can be expressed as dichotomous (e.g.&nbsp;people whose favorite fruit is apple), what you are estimating is the population proportion in each group (x% use MAC, y% use PC). In that case, the confidence interval is:</p>
+<p><span class="math inline">\(p\pm Z \times \sigma_p\)</span></p>
+<p>based on the standard error for proportions:</p>
+<p><span class="math inline">\(\sigma_p = \sqrt{p \times (1-p)/n}\)</span></p>
+<p>Where:</p>
+<p><code>Z</code> is the z-score for the desired confidence interval (1.96 for a 95% level of confidence) <code>p</code> is the proportion from the sample <code>n</code> is the size of the sample</p>
+<p>For example, in a survey of 53 students in regard to their laptop operating system:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>prop <span class="ot">=</span> peng <span class="sc">%&gt;%</span> <span class="fu">pull</span>(species) <span class="sc">%&gt;%</span> <span class="fu">table</span>() <span class="sc">%&gt;%</span> <span class="fu">prop.table</span>() </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>stderr <span class="ot">=</span> <span class="fu">sqrt</span>(prop <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">-</span> prop)<span class="sc">/</span><span class="fu">nrow</span>(peng))</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>moe <span class="ot">=</span> <span class="fl">1.96</span> <span class="sc">*</span> stderr</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">"Estimated "</span>, <span class="fu">names</span>(prop), <span class="st">" species = "</span>, </span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> (prop <span class="sc">-</span> moe)), <span class="st">"% to "</span>, </span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> (prop <span class="sc">+</span> moe)), <span class="st">"%"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Estimated Adelie species = -86% to 174%"   
+[2] "Estimated Chinstrap species = -67% to 106%"
+[3] "Estimated Gentoo species = -81% to 153%"   </code></pre>
+</div>
+</div>
+</section>
+<section id="confidence-interval-for-means" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="confidence-interval-for-means"><span class="header-section-number">7.7</span> Confidence Interval for Means</h2>
+<p>T is used instead of the z-score to calculate a margin of error for sample means or proportions:</p>
+<p><span class="math inline">\(s \pm t\times \sigma \bar x\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">nrow</span>(peng) <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>t <span class="ot">=</span> <span class="fu">qt</span>(<span class="at">p =</span> <span class="fl">0.95</span>, <span class="at">df =</span> df)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>stderr <span class="ot">=</span> <span class="fu">sd</span>(peng<span class="sc">$</span>bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">nrow</span>(peng))</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>moe <span class="ot">=</span> <span class="fu">round</span>(t <span class="sc">*</span> stderr, <span class="dv">2</span>)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>mean.peng <span class="ot">=</span> <span class="fu">mean</span>(peng<span class="sc">$</span>bill_depth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"Estimated average length is"</span>, mean.peng <span class="sc">-</span> moe, <span class="st">"to"</span>, mean.peng <span class="sc">+</span> moe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Estimated average length is 16.6611695906433 to 17.6411695906433"</code></pre>
+</div>
+</div>
+</section>
+<section id="confidence-interval-for-proportions" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="confidence-interval-for-proportions"><span class="header-section-number">7.8</span> Confidence Interval for Proportions</h2>
+<p><span class="math inline">\(p \pm t \times \sigma_p\)</span> p ± t * σp</p>
+<p>Using the example above of a survey where 40% of respondendents indicated using a Mac rather than a PC for their home computer or laptop, we can see the wider margin of error for proportions associated with a small sample:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>leo <span class="ot">=</span> <span class="fu">table</span>(peng<span class="sc">$</span>species)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>leo <span class="ot">=</span> leo <span class="sc">/</span> <span class="fu">sum</span>(leo)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>stderr <span class="ot">=</span> <span class="fu">sqrt</span>(leo <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> leo) <span class="sc">/</span> <span class="fu">nrow</span>(peng))</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>t <span class="ot">=</span> <span class="fu">qt</span>(<span class="fl">0.95</span>, <span class="fu">nrow</span>(peng) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>moe <span class="ot">=</span> t <span class="sc">*</span> stderr</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">"Estimated "</span>, <span class="fu">names</span>(leo), <span class="st">" users (small sample) = "</span>, </span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>((leo <span class="sc">-</span> moe) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>), <span class="st">"% - "</span>, </span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>((leo <span class="sc">+</span> moe) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>), <span class="st">"%"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Estimated Adelie users (small sample) = 39.8% - 48.6%"   
+[2] "Estimated Chinstrap users (small sample) = 16.2% - 23.3%"
+[3] "Estimated Gentoo users (small sample) = 31.8% - 40.3%"   </code></pre>
+</div>
+</div>
+</section>
+<section id="how-big-a-sample-do-i-need-to-have-the-confidence-i-want" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="how-big-a-sample-do-i-need-to-have-the-confidence-i-want"><span class="header-section-number">7.9</span> How Big a Sample Do I Need to Have the Confidence I Want?</h2>
+<p>Using simple algebra, we can transform the formulas for margin of error to find the sample size (n) that we need get the margin of error (E) that we are able to tolerate:</p>
+<p>For population mean estimates: $n = (Z S/ E $</p>
+<p>For population proportion estimates:</p>
+<p><span class="math inline">\(n = Z2 \times p \times (1-p)/ E2\)</span></p>
+<p><em>Estimating s and p</em> For the mean formula, you need a sample mean (s), and for the proportion formula you need the sample proportion (p). But since you have not yet done the sampling yet, you cannot know these values.</p>
+<p>There are three imperfect but practical ways to estimate these values:</p>
+<ul>
+<li>Two-stage sampling design involves doing a preliminary survey to get an estimate of the sample mean (s) or the proportion (p)</li>
+<li>For means or proportions, when available, you can use results from a prior survey or estimate</li>
+<li>For proportions you can use p = 50% as a worst case scenario. This causes the p * (1 - p) part of the formula to be its maximimum possible value so the sample size is the largest possible value</li>
+</ul>
+<p>Note that the examples below presume a random sample from the entire population you are basing the estimate upon. If you are trying to make estimates about Americans, your random sample would need to be drawn from a list of all Americans with 100% participation. Drawing a perfectly random sample from anything other than a trivial or captive population is usually impossible, requiring more sophisticated modeling techniques to adjust the results and compensate for segments of the population that were undersampled.</p>
+<p><em>Example Sample Size</em> Following the examples using male height above, suppose you wish to get an estimate for GPA ±0.1 points (E = 0.1) with 95% confidence (Z = 1.96). For s you use the mean from the sample of 3.009143.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">=</span> <span class="fl">1.96</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>s <span class="ot">=</span> <span class="fl">3.009143</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>E <span class="ot">=</span> <span class="fl">0.1</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> (Z <span class="sc">*</span> s <span class="sc">/</span> E)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"Minimum sample size ="</span>, <span class="fu">ceiling</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Minimum sample size = 3479"</code></pre>
+</div>
+</div>
+<p>Following on the proportions example above, suppose you wish to get a better estimate of the percent of students that use Macs as their personal home computers or laptops ±1% (E = 0.01) at a 95% level of confidence (Z = 1.96). Using the estimated proportion of 47% (p = 0.47) from the survey given above:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">=</span> <span class="fl">1.96</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">=</span> <span class="fl">0.47</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>E <span class="ot">=</span> <span class="fl">0.01</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> (Z<span class="sc">^</span><span class="dv">2</span>) <span class="sc">*</span> p <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p) <span class="sc">/</span> (E<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"Minimum sample size ="</span>, <span class="fu">ceiling</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Minimum sample size = 9570"</code></pre>
+</div>
+</div>
+</section>
+<section id="calculations-in-excel" class="level2" data-number="7.10">
+<h2 data-number="7.10" class="anchored" data-anchor-id="calculations-in-excel"><span class="header-section-number">7.10</span> Calculations in Excel</h2>
+<section id="confidence-interval-for-means-1" class="level3" data-number="7.10.1">
+<h3 data-number="7.10.1" class="anchored" data-anchor-id="confidence-interval-for-means-1"><span class="header-section-number">7.10.1</span> Confidence Interval for Means</h3>
+<p>Using a simulated sample of heights from 100 American men in this CSV file, this formula can be used to calculate standard error:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ot">=</span><span class="fu">STDEV</span>(A2<span class="sc">:</span>A101) <span class="sc">/</span> <span class="fu">SQRT</span>(<span class="fu">COUNTA</span>(A2<span class="sc">:</span>A101))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To calculate margin of error for means given:</p>
+<ul>
+<li>That standard error in cell B2</li>
+<li>The Z-score for a 95% level of confidence (z = 1.96) in cell B3</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ot">=</span>B3 <span class="sc">*</span> B2 <span class="sc">/</span> <span class="fu">SQRT</span>(B4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="confidence-interval-for-proportions-1" class="level3" data-number="7.10.2">
+<h3 data-number="7.10.2" class="anchored" data-anchor-id="confidence-interval-for-proportions-1"><span class="header-section-number">7.10.2</span> Confidence Interval for Proportions</h3>
+<p>Using survey responses from this CSV file, we can calculate the confidence interval for proportions in Excel.</p>
+<p>When dealing with categorical data in Excel, you can use the COUNTIF() function to find the number of cells in your sample that match a particular value. The first parameter is the data and the second parameter is the condition. Note that the second parameter must be enclosed in quotes.</p>
+<p>For example, with the CSV file linke above, the data in cells A2:A33 is either “Mac” or “PC”. This will return the number of Mac users:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ot">=</span><span class="fu">COUNTIF</span>(A2<span class="sc">:</span>A33, <span class="st">"Mac"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can then get the proportion (percentage) of yes cells with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ot">=</span><span class="fu">COUNTIF</span>(A2<span class="sc">:</span>A22, <span class="st">"Mac"</span>) <span class="sc">/</span> <span class="fu">COUNTA</span>(A2<span class="sc">:</span>A22)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you put your proportion in cell B2 and your sample size in cell B3, the standard error for proportions is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ot">=</span><span class="fu">SQRT</span>(B2 <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> B2) <span class="sc">/</span> B3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you then put the Z-score for your level of confidence in cell B3 (for 95% confidence, this is 1.96), the Excel formula for margin of error for proportions is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="ot">=</span>B4 <span class="sc">*</span> <span class="fu">SQRT</span>(B2 <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> B2) <span class="sc">/</span> B3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Z-Scores For Other Levels of Confidence In Excel, z-scores for other levels of confidence can be calculated with the NORMSINV() function. With the confidence interval in cell B2 (as a percent on a scale of 0 to 1):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ot">=</span><span class="fu">NORMSINV</span>(<span class="dv">1</span> <span class="sc">-</span> ((<span class="dv">1</span> <span class="sc">-</span> B2) <span class="sc">/</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Confidence Interval for Small Samples In Excel, the TINV() function can be used to calculate t for use with standard error to calculate a confidence interval.</p>
+<p>To calculate the margin of error for means given:</p>
+<p>A level of confidence in cell B2 The standard deviation in cell B3 The sample size in cell B4</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="ot">=</span><span class="fu">TINV</span>(<span class="dv">1</span> <span class="sc">-</span> B2, B4 <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> B3 <span class="sc">/</span> <span class="fu">SQRT</span>(B4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To calculate the margin of error for proportions:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="ot">=</span><span class="fu">TINV</span>(<span class="dv">1</span> <span class="sc">-</span> B3, B4 <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="fu">SQRT</span>(B2 <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> B2) <span class="sc">/</span> B4)<span class="st">```</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="at">Excel Confidence Interval Functions</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="at">As you might expect, Excel has functions to simplify confidence intervals for means. CONFIDENCE.NORM() can be used to calculate margin of error with sample sizes over 30 and CONFIDENCE.T can be used with sample sizes of 30 or less. Both take the same parameters:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="ot">=</span><span class="fu">CONFIDENCE.NORM</span>(alpha, stdev, sample_size)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="ot">=</span><span class="fu">CONFIDENCE.T</span>(alpha, stdev, sample_size)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>alpha = 1 minus level of confidence (0.05 for 95% confidence level) stdev = standard deviation of the sample sample_size = count of values in the sample For example, given a level of confidence in cell B2, the standard deviation in cell B3, and the sample size in cell B4, the margin of error (for a sample size less than 30) using the t-distribution function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="ot">=</span><span class="fu">CONFIDENCE.T</span>(<span class="dv">1</span> <span class="sc">-</span> B2, B3, B4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Excel does not have a convenience function for confidence interval for proportions.</p>
+<p>Example Sample Size Estimation Following the examples using male height above, suppose you wish to get an estimate for female height ±1 inch (E = 1) with 95% confidence (Z = 1.96). For s you use a value you have seen on the internet of 63.7 inches. The power() function is used for the exponent:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="ot">=</span><span class="fu">POWER</span>(<span class="fl">1.96</span> <span class="sc">*</span> <span class="fl">63.7</span> <span class="sc">/</span> <span class="dv">1</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Following on the proportions example above, suppose you wish to get a better estimate of the percent of Americans that use Macs as their personal home computers or laptops &amp;plusmin;5% at a 95% level of confidence (Z = 1.6). Using the small sample estimated mean of 40% given above:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="ot">=</span><span class="fu">POWER</span>(<span class="fl">1.96</span>, <span class="dv">2</span>) <span class="sc">*</span> <span class="fl">0.4</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.4</span>) <span class="sc">/</span> <span class="fu">POWER</span>(<span class="fl">0.05</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./loadingData.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><strong>Loading Data and Data Cleaning</strong></span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./basicFishStats.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>Basic Fisheries Statistics</strong></span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

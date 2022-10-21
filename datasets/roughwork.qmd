@@ -24,7 +24,6 @@ require(ggpmisc)
 require(sizeMat)
 require(LBSPR)
 require(TropFishR)
-require(fishR)
 
 conflicted::conflict_prefer(name = "select", winner = "dplyr")
 

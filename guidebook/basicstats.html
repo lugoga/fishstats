@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>WIO-fish - Appendix E — Basic Data Manipulations</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./recruitment.html" rel="next">
+<link href="./lw.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Appendix E — Basic Data Manipulations</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./" class="sidebar-logo-link">
+      <img src="./FAO_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">WIO-fish</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/lugoga/ecasData" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rstudio.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started with R and RStudio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Rlanguage.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">R as a Programming Language</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./packages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Packages</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Entry and Management</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./loadingData.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Loading Data and Data Cleaning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sample.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sample Data in R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicFishStats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Basic Fisheries Statistics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicFishPlotting.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Plotting Fisheries Data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./simulate.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simulate Data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./installR.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">R language installation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./installRstudio.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">What is RStudio?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./installPackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Install packages in R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lw.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Weight-Length Relationships</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicstats.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Basic Data Manipulations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./recruitment.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Recruitment and logistic model</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#required-packages-for-this-supplement" id="toc-required-packages-for-this-supplement" class="nav-link active" data-scroll-target="#required-packages-for-this-supplement"> <span class="header-section-number">E.0.1</span> Required Packages for this Supplement</a></li>
+  <li><a href="#data-used-in-this-supplement" id="toc-data-used-in-this-supplement" class="nav-link" data-scroll-target="#data-used-in-this-supplement"> <span class="header-section-number">E.0.2</span> Data Used in this Supplement</a></li>
+  <li><a href="#terminology" id="toc-terminology" class="nav-link" data-scroll-target="#terminology"> <span class="header-section-number">E.1</span> Terminology</a></li>
+  <li><a href="#common-back-calculation-models" id="toc-common-back-calculation-models" class="nav-link" data-scroll-target="#common-back-calculation-models"> <span class="header-section-number">E.2</span> Common Back-Calculation Models</a></li>
+  <li><a href="#data-organization-manipulation" id="toc-data-organization-manipulation" class="nav-link" data-scroll-target="#data-organization-manipulation"> <span class="header-section-number">E.3</span> <strong>Data Organization &amp; Manipulation</strong></a></li>
+  <li><a href="#computing-back-calculated-lengths" id="toc-computing-back-calculated-lengths" class="nav-link" data-scroll-target="#computing-back-calculated-lengths"> <span class="header-section-number">E.4</span> <strong>Computing Back-Calculated Lengths</strong></a>
+  <ul class="collapse">
+  <li><a href="#scale-length-relationships" id="toc-scale-length-relationships" class="nav-link" data-scroll-target="#scale-length-relationships"> <span class="header-section-number">E.4.1</span> <strong>Scale-Length Relationships</strong></a></li>
+  <li><a href="#applying-the-back-calculation-models" id="toc-applying-the-back-calculation-models" class="nav-link" data-scroll-target="#applying-the-back-calculation-models"> <span class="header-section-number">E.4.2</span> <strong>Applying the Back-Calculation Models</strong></a></li>
+  </ul></li>
+  <li><a href="#reproducibility-information" id="toc-reproducibility-information" class="nav-link" data-scroll-target="#reproducibility-information"> <span class="header-section-number">E.5</span> <strong>Reproducibility Information</strong></a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"> <span class="header-section-number">E.6</span> <strong>References</strong></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Appendix E — Basic Data Manipulations</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<ul>
+<li><p><a href="http://derekogle.com/IFAR/supplements/backcalculation/#terminology">Terminology</a></p></li>
+<li><p><a href="http://derekogle.com/IFAR/supplements/backcalculation/#common-back-calculation-models">Common Back-Calculation Models</a></p></li>
+<li><p><a href="http://derekogle.com/IFAR/supplements/backcalculation/#data-organization-manipulation">Data Organization &amp; Manipulation</a></p></li>
+<li><p><a href="http://derekogle.com/IFAR/supplements/backcalculation/#computing-back-calculated-lengths">Computing Back-Calculated Lengths</a></p>
+<ul>
+<li><p><a href="http://derekogle.com/IFAR/supplements/backcalculation/#scale-length-relationships">Scale-Length Relationships</a></p></li>
+<li><p><a href="http://derekogle.com/IFAR/supplements/backcalculation/#applying-the-back-calculation-models">Applying the Back-Calculation Models</a></p></li>
+</ul></li>
+</ul>
+<hr>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Francis (1990) defined *back-calculation* as *… a technique that uses a set of measurements made on a fish at one time to infer its length at an earlier time or times. Specifically, the dimensions of one or more marks in some hard part of the fish, together with its current body length, are used to estimate its length at the time of formation of each of the marks. … The marks are generally annual rings associated with growth checks, … .* Thus, backcalculation is the reconstruction of the length of a fish at previous ages from measurements made on calcified structures.</p>
+</div>
+</div>
+<section id="required-packages-for-this-supplement" class="level3" data-number="E.0.1">
+<h3 data-number="E.0.1" class="anchored" data-anchor-id="required-packages-for-this-supplement"><span class="header-section-number">E.0.1</span> Required Packages for this Supplement</h3>
+<p>Functions used in this supplement require the packages shown below.</p>
+<pre><code>&gt; library(FSA)
+&gt; library(magrittr)
+&gt; library(dplyr)
+&gt; library(tidyr)
+&gt; library(stringr)</code></pre>
+</section>
+<section id="data-used-in-this-supplement" class="level3" data-number="E.0.2">
+<h3 data-number="E.0.2" class="anchored" data-anchor-id="data-used-in-this-supplement"><span class="header-section-number">E.0.2</span> Data Used in this Supplement</h3>
+<p>All analyses in this supplement use the West Bearskin Lake (MN) Smallmouth Bass (<em>Micropterus dolomieu</em>) data from Weisberg (1993) found in <code>SMBassWB.csv</code> (<a href="https://github.com/droglenc/FSA/blob/master/data-raw/SMBassWB.csv">view</a>, <a href="https://raw.githubusercontent.com/droglenc/FSA/master/data-raw/SMBassWB.csv">download</a>, <a href="http://derekogle.com/fishR/data/data-html/SMBassWB.html">meta-data</a>). The analysis in this supplement will focus on those fish captured in 1990. Three variables that were constant and not used in this analysis and three measurement variables that corresponded to ages that did not exist after reducing to only fish capted in 1990 were removed to save space.</p>
+<pre><code>&gt; SMBassWB &lt;- read.csv("SMBassWB.csv")
+
+&gt; wb90 &lt;- filterD(SMBassWB,yearcap==1990) %&gt;%
+    select(-(species:gear),-(anu10:anu12))</code></pre>
+</section>
+<section id="terminology" class="level2" data-number="E.1">
+<h2 data-number="E.1" class="anchored" data-anchor-id="terminology"><span class="header-section-number">E.1</span> Terminology</h2>
+<p>Two types of measurements can be made on calcified structures. A <em>radial</em> measurement is the total distance from the center of the structure (e.g., focus of scale or nucleus of otolith) to the edge of an annulus. An <em>incremental</em> measurement is the distance between two successive annuli. Radial measurements are required for back-calculation of fish length.</p>
+<p>Back-calculation models estimate length at previous age ii (i.e., LiLi) from known values of length at time of capture (LCLC), scale radius to the iith annulus (SiSi), and scale radius at time of capture (SCSC). Several back-calculation models rely on the relationship between SCSC and LCLC. Depending on the model, a function of mean SCSC for a given LCLC (i.e., E(SC|LC)E(SC|LC) ) or mean LCLC for a given SCSC (i.e., E(LC|SC)E(LC|SC)) is used. These functions are not required to be linear, but often are, and in their linear form are represented as</p>
+<p>E(SC|LC)=a+bLC(1)E(SC|LC)=a+bLC(1)</p>
+<p>E(LC|SC)=c+dSC(2)E(LC|SC)=c+dSC(2)</p>
+<p>Fitting these regressions is demonstrated <a href="http://derekogle.com/IFAR/supplements/backcalculation/#scale-length-relationships">below</a>.</p>
+</section>
+<section id="common-back-calculation-models" class="level2" data-number="E.2">
+<h2 data-number="E.2" class="anchored" data-anchor-id="common-back-calculation-models"><span class="header-section-number">E.2</span> Common Back-Calculation Models</h2>
+<p>The first back-calculation model was jointly developed by Knut Dahl and Einar Lea and appeared in Lea (1910). The underlying concept of the <em>Dahl-Lea model</em> is that growth of the calcified structure is in exact proportion to growth in length of the fish. With this, the ratio of SiSi to SCSC is the same as the ratio of LiLi to LCLC. Rearrangement of this equality yields the Dahl-Lea back-calculation model</p>
+<p>Li=SiSCLC(3)Li=SiSCLC(3)</p>
+<p>The Dahl-Lea model describes a family of straight lines that pass through the <strong>origin</strong> and each observed (SC,LCSC,LC) point. Visually (Figure 1), the estimated LiLi for a particular fish is found by locating SiSi along the x-axis, moving vertically until the straight line for that fish is met, and then moving horizontally to the point on the y-axis.</p>
+<p><img src="http://derekogle.com/IFAR/supplements/backcalculation/index_files/figure-html/BackCalcEx704-1.png" class="img-fluid" alt=""></p>
+<p>Figure 1: Plot of length-at-capture versus scale radius for West Bearskin Lake Smallmouth Bass in 1990. All four methods of backcalculation are shown for fish 704 (S2=3.49804S2=3.49804, LC=218LC=218, and SC=7.44389SC=7.44389; black point and line) with calculational steps shown with the arrows. Fish 701 is shown as the gray point and line for comparative purposes.</p>
+<p>Fraser (1916) was the first to describe, but Lee (1920) was the first to formally derive, the back-calculation model from the concept that “the growth <em>increment</em> of the scale is, on the average …, a constant proportion of the growth <em>increment</em> of the fish” (Francis 1990). In practice, the <em>Fraser-Lee model</em> modified the Dahl-Lea model by adjusting for the length of the fish when the calcified structure forms (i.e., L=cL=c when S=0S=0), that is,</p>
+<p>Li=SiSC(LC−c)+c(4)Li=SiSC(LC−c)+c(4)</p>
+<p>where cc comes from the length of the fish at the time of scale formation, the intercept of the length-scale relationship regression (e.g., from Equation 2), or from published “standards” for a species (Carlander 1982). The Fraser-Lee model describes a family of lines with an intercept of cc that pass through the (SC,LCSC,LC) point (Francis (1990); Figure 1).</p>
+<p>The <em>scale proportional hypothesis</em> (SPH) model was named by Francis (1990), but was first recognized by Whitney and Carlander (1956) when they said “<em>{i}f the scale was 10 per cent larger when the fish was caught than the average scale for that size of fish, [then] the scale would be 10 per cent larger than normal throughout the life.</em>” If “average” and “normal” are considered to be expected values, then this hypothesis can be written as</p>
+<p>SiE[S|Li]=SCE[S|LC]SiE[S|Li]=SCE[S|LC]</p>
+<p>If it is assumed that the scale-length relationship is linear, then the two expected values in these ratios are computed by plugging LiLi and LCLC, respectively, into the scale-length relationship (i.e., Equation 1) to produce</p>
+<p>Sia+bLi=SCa+bLCSia+bLi=SCa+bLC</p>
+<p>which can be solved for LiLi to yield the general SPH back-calculation model</p>
+<p>Li=SiSC(LC+ab)−ab(5)Li=SiSC(LC+ab)−ab(5)</p>
+<p>The linear SPH model produces a family of lines that all have an intercept of −ab−ab and pass through each observed (SC,LCSC,LC) point (Figure 1). The SPH model is the same as the Fraser-Lee model except that the intercept from Equation 2 is replaced with −ab−ab. Further note that the SPH model is the same as the Dahl-Lea model if a=0a=0.</p>
+<p>The <em>body proportional hypothesis</em> (BPH) model was also named by Francis (1990) and was also first recognized by Whitney and Carlander (1956) when they said “<em>{i}f a fish at time of capture were 10 per cent smaller than the average fish with that size of scale, [then] the fish would be 10 per cent smaller than the expected length for the size of that scale throughout life.</em>” This hypothesis can be written as</p>
+<p>LiE[L|Si]=LCE[L|SC]LiE[L|Si]=LCE[L|SC]</p>
+<p>If the length-scale relationship is linear then the expected values can be found by plugging SiSi and ScSc into Equation 2 to get</p>
+<p>Lic+dSi=LCc+dSCLic+dSi=LCc+dSC</p>
+<p>which can be solved for LiLi to yield the general BPH back-calculation model</p>
+<p>Li=LCc+dSic+dSc(6)Li=LCc+dSic+dSc(6)</p>
+<p>The linear BPH model produces a family of lines that have an intercept of cLCc+dSCcLCc+dSC and pass through each observed (SC,LCSC,LC) point (Figure 1). In contrast to the other back-calculation models, the BPH model uses lines with a different intercept for each fish. The linear BPH model is the same as the Dahl-Lea model if c=0c=0.</p>
+<p>Vigliola and Meekan (2009) described 18 other models for the back-calculation of fish length. Functions for each of these models can be created with <code>bcFuns()</code> from <code>FSA</code>.</p>
+</section>
+<section id="data-organization-manipulation" class="level2" data-number="E.3">
+<h2 data-number="E.3" class="anchored" data-anchor-id="data-organization-manipulation"><span class="header-section-number">E.3</span> <strong>Data Organization &amp; Manipulation</strong></h2>
+<p>In <em>wide</em> or <em>one-fish-per-line</em> format, all information about a single fish, including all of the measurements from the calcified structure, is in one row of the data.frame. The <code>wb90</code> data.frame contains radial measurments in the wide format (note that the portion shown below has four rows with columns that wrapped).</p>
+<pre><code>&gt; headtail(wb90,n=2)
+
+    yearcap fish agecap lencap    anu1    anu2    anu3    anu4    anu5    anu6
+1      1990  482      1     75 1.51076      NA      NA      NA      NA      NA
+2      1990  768      1     75 1.57989      NA      NA      NA      NA      NA
+180    1990  388      9    300 1.08462 2.03527 3.22724 4.63407 5.53355 6.53174
+181    1990  389      9    329 1.05913 2.18769 3.55137 4.40766 5.78634 7.58178
+       anu7    anu8     anu9   radcap
+1        NA      NA       NA  1.51076
+2        NA      NA       NA  1.57989
+180 7.27807 8.08080  9.38096  9.38096
+181 8.32094 9.46362 10.43491 10.43491</code></pre>
+<p>For the back-calculation of fish length, these data must be radial, and not incremental, measurements. If the <code>wb90</code> data.frame had contained incremental measurements, then it could be converted to radial measurements with <code>gConvert()</code> from <code>FSA</code>. The <code>gConvert()</code> function requires the data frame with the incremental measurements as the first argument, the prefix (in quotes) for the columns that contain the incremental measurements in <code>in.pre=</code>, and the type of measurement to <strong>convert to</strong> in <code>out.type=</code> (the options are <code>"rad"</code> (the default) or <code>"inc"</code>). For example, the code below would create a new data.frame from <code>wb90</code> with radial measurements (<strong>IF</strong> <code>wb90</code> had incremental measurements).</p>
+<pre><code>&gt; wb90A &lt;- gConvert(wb90,in.pre="anu",out.type="rad")</code></pre>
+<p>For efficient back-calculation, the data must also be converted to <em>long</em> or <em>one-measurement-per-line</em> format. As demonstrated in <a href="http://derekogle.com/IFAR/"><em>Introductory Fisheries Analyses with R</em></a>, wide data may be converted to long data with <code>gather()</code> from <code>tidyr</code>. As a reminder, the arguments to <code>gather()</code> are the wide data.frame, a name for the new variable in the long format that will identify the individual (i.e., which radial measurement), a name for the new variable in the long format that will be the value for the individual (i.e., the radial measurement), and the variables in the wide format that contain the measurements.</p>
+<pre><code>&gt; wb90r &lt;- gather(wb90,agei,radi,anu1:anu9) %&gt;%
+    arrange(fish,agei)
+&gt; headtail(wb90r)
+
+     yearcap fish agecap lencap  radcap agei    radi
+1       1990    0      7    278 9.06803 anu1 1.50631
+2       1990    0      7    278 9.06803 anu2 3.11450
+3       1990    0      7    278 9.06803 anu3 4.51154
+1627    1990  998      7    298 8.54805 anu7 8.54805
+1628    1990  998      7    298 8.54805 anu8      NA
+1629    1990  998      7    298 8.54805 anu9      NA</code></pre>
+<p>As noted in the <strong>IFAR</strong> book, there are three potential problems with this result. First, the new <code>agei</code> variable contains the names of the variables from the original wide format data.frame (e.g., <code>anu1</code>, <code>anu2</code>) rather than numbers that correspond to the age that the annulus was formed. Converting these labels to numbers begins by replacing the “anu” prefix with blanks (or an empty string) using <code>str_sub()</code> with the vector of names as the first argument, <code>start=1</code> (because “anu” is a prefix) and <code>end=3</code> (because “anu” is three characters long). The result from <code>str_sub()</code>, however, is a character that must then be converted to a numeric with <code>as.numeric()</code>.</p>
+<p>The second problem is that several of the radial measurements contain <code>NA</code> values. The non-<code>NA</code> values are found and retained by using <code>!is.na()</code> within <code>filterD()</code>.</p>
+<p>The third problem, while not an issue with these particular data, is that “plus growth” may have been recorded. “Plus growth” is growth on the margin of the calcified structure that does not represent a complete year of growth. If “plus growth” is present, then the new <code>agei</code> variable will have a value greater than the age-at-capture value. These instances should be removed from the new long format data.frame.</p>
+<p>The following code adjusts for these three issues.</p>
+<pre><code>&gt; str_sub(wb90r$agei,start=1,end=3) &lt;- ""
+&gt; wb90r %&lt;&gt;% mutate(agei=as.numeric(agei)) %&gt;%
+    filterD(!is.na(radi)) %&gt;%
+    filterD(agei&lt;=agecap)
+&gt; headtail(wb90r)
+
+    yearcap fish agecap lencap  radcap agei    radi
+1      1990    0      7    278 9.06803    1 1.50631
+2      1990    0      7    278 9.06803    2 3.11450
+3      1990    0      7    278 9.06803    3 4.51154
+765    1990  998      7    298 8.54805    5 5.17646
+766    1990  998      7    298 8.54805    6 6.62240
+767    1990  998      7    298 8.54805    7 8.54805</code></pre>
+</section>
+<section id="computing-back-calculated-lengths" class="level2" data-number="E.4">
+<h2 data-number="E.4" class="anchored" data-anchor-id="computing-back-calculated-lengths"><span class="header-section-number">E.4</span> <strong>Computing Back-Calculated Lengths</strong></h2>
+<section id="scale-length-relationships" class="level3" data-number="E.4.1">
+<h3 data-number="E.4.1" class="anchored" data-anchor-id="scale-length-relationships"><span class="header-section-number">E.4.1</span> <strong>Scale-Length Relationships</strong></h3>
+<p>The scale-length (Equation 1) and length-scale (Equation 2) relationships required for all but the Dahl-Lea method are computed with the wide format data. Thus, the wide format data.frame must contain the length of the fish (e.g., <code>lencap</code>) and the total radius of the calcified structure (e.g., <code>radcap</code>) at the time of capture. Both linear relationships are fit with <code>lm()</code> and the coefficients should be extracted with <code>coef()</code> and saved into objects.</p>
+<pre><code>&gt; lm.sl &lt;- lm(radcap~lencap,data=wb90)
+&gt; ( a &lt;- coef(lm.sl)[[1]] )
+
+[1] -1.304391
+
+&gt; ( b &lt;- coef(lm.sl)[[2]] )
+
+[1] 0.03537477
+
+&gt; lm.ls &lt;- lm(lencap~radcap,data=wb90)
+&gt; ( c &lt;- coef(lm.ls)[[1]] )
+
+[1] 41.65166
+
+&gt; ( d &lt;- coef(lm.ls)[[2]] )
+
+[1] 27.35597</code></pre>
+</section>
+<section id="applying-the-back-calculation-models" class="level3" data-number="E.4.2">
+<h3 data-number="E.4.2" class="anchored" data-anchor-id="applying-the-back-calculation-models"><span class="header-section-number">E.4.2</span> <strong>Applying the Back-Calculation Models</strong></h3>
+<p>The LiLi estimated with a back-calculation model are most easily added to the long format data.frame. This is largely an exercise in adding a variable to the data.frame with <code>mutate()</code> from <code>dplyr</code>. For example, the LiLi computed with all four back-calculation models are added to <code>wb90r</code> below.</p>
+<pre><code>&gt; wb90r %&lt;&gt;% mutate(DL.len=(radi/radcap)*lencap,
+                    FL.len=(radi/radcap)*(lencap-c)+c,
+                    SPH.len=(-a/b)+(lencap+a/b)*(radi/radcap),
+                    BPH.len=lencap*(c+d*radi)/(c+d*radcap))
+&gt; headtail(wb90r,n=2)
+
+    yearcap fish agecap lencap  radcap agei    radi    DL.len    FL.len
+1      1990    0      7    278 9.06803    1 1.50631  46.17918  80.91199
+2      1990    0      7    278 9.06803    2 3.11450  95.48171 122.82772
+766    1990  998      7    298 8.54805    6 6.62240 230.86847 240.25149
+767    1990  998      7    298 8.54805    7 8.54805 298.00000 298.00000
+      SPH.len   BPH.len
+1    76.92752  79.50736
+2   119.69064 121.72181
+766 239.17509 241.01809
+767 298.00000 298.00000</code></pre>
+<p>For example, the mean length-at-age may be computed from the back-calculated lengths (shown below for the Fraser-Lee results).</p>
+<pre><code>&gt; tmp &lt;- wb90r %&gt;%
+    group_by(agei) %&gt;%
+    summarize(n=validn(FL.len),mn=mean(FL.len),sd=sd(FL.len)) %&gt;%
+    as.data.frame()
+&gt; tmp
+
+  agei   n       mn        sd
+1    1 181  78.5663  6.472692
+2    2 178 114.1527 10.453632
+3    3 155 146.7669 13.898434
+4    4  71 172.6512 15.339848
+5    5  64 201.0405 17.479717
+6    6  64 235.3834 23.350527
+7    7  50 268.5969 25.286958
+8    8   2 283.2237 26.912010
+9    9   2 314.5000 20.506097</code></pre>
+<p>Additionally, the mean length at each back-calculated age computed separately for each age-at-capture may be computed with <code>sumTable()</code> from <code>FSA</code>, where the left side of the formula is the quantitative variable to be summarized and the right side has grouping variables presented in <code>row*column</code> format.</p>
+<pre><code>&gt; sumTable(FL.len~agecap*agei,data=wb90r,digits=1)
+
+     1     2     3     4     5     6     7     8     9
+1 73.7    NA    NA    NA    NA    NA    NA    NA    NA
+2 79.7 113.3    NA    NA    NA    NA    NA    NA    NA
+3 77.3 112.8 148.9    NA    NA    NA    NA    NA    NA
+4 71.3 121.8 160.9 194.0    NA    NA    NA    NA    NA
+6 79.8 107.9 136.0 169.6 198.8 229.7    NA    NA    NA
+7 81.6 118.2 144.7 170.7 201.8 237.0 269.1    NA    NA
+9 71.2  99.8 135.0 166.1 197.5 236.0 256.4 283.2 314.5</code></pre>
+<hr>
+</section>
+</section>
+<section id="reproducibility-information" class="level2" data-number="E.5">
+<h2 data-number="E.5" class="anchored" data-anchor-id="reproducibility-information"><span class="header-section-number">E.5</span> <strong>Reproducibility Information</strong></h2>
+<ul>
+<li><p><strong>Compiled Date:</strong> Thu Nov 05 2015</p></li>
+<li><p><strong>Compiled Time:</strong> 6:48:50 PM</p></li>
+<li><p><strong>R Version:</strong> R version 3.2.2 (2015-08-14)</p></li>
+<li><p><strong>System:</strong> Windows, i386-w64-mingw32/i386 (32-bit)</p></li>
+<li><p><strong>Base Packages:</strong> base, datasets, graphics, grDevices, methods, stats, utils</p></li>
+<li><p><strong>Required Packages:</strong> FSA, magrittr, dplyr, tidyr, stringr, captioner, knitr and their dependencies (assertthat, car, DBI, digest, evaluate, formatR, gdata, gplots, graphics, grDevices, highr, Hmisc, lazyeval, markdown, methods, plotrix, plyr, R6, Rcpp, sciplot, stats, stringi, tools, utils, yaml)</p></li>
+<li><p><strong>Other Packages:</strong> captioner_2.2.3, dplyr_0.4.3, extrafont_0.17, FSA_0.8.4, FSAdata_0.3.2, knitr_1.11, magrittr_1.5, rmarkdown_0.8.1, stringr_1.0.0, tidyr_0.3.1</p></li>
+<li><p><strong>Loaded-Only Packages:</strong> assertthat_0.1, DBI_0.3.1, digest_0.6.8, evaluate_0.8, extrafontdb_1.0, formatR_1.2.1, gdata_2.17.0, gtools_3.5.0, highr_0.5.1, htmltools_0.2.6, lazyeval_0.1.10, parallel_3.2.2, plyr_1.8.3, R6_2.1.1, Rcpp_0.12.1, Rttf2pt1_1.3.3, stringi_1.0-1, tools_3.2.2, yaml_2.1.13</p></li>
+<li><p><strong>Links:</strong> <a href="http://derekogle.com/IFAR/supplements/backcalculation/backcalculation.R">Script</a> / <a href="http://derekogle.com/IFAR/supplements/backcalculation/index.Rmd">RMarkdown</a></p></li>
+</ul>
+<hr>
+</section>
+<section id="references" class="level2" data-number="E.6">
+<h2 data-number="E.6" class="anchored" data-anchor-id="references"><span class="header-section-number">E.6</span> <strong>References</strong></h2>
+<p>Carlander, K. D. 1982. Standard intercepts for calculating lengths from scale measurements for some centrarchid and percid fishes. Transactions of the American Fisheries Society 111:332–336.</p>
+<p>Francis, R. I. C. C. 1990. Back-calculation of fish length: A critical review. Journal of Fish Biology 36:883–902.</p>
+<p>Fraser, C. M. 1916. Growth of the spring salmon. Transactions of the Pacific Fisheries Society 1915:29–39.</p>
+<p>Lea, E. 1910. On the methods used in the Herring-investigations. Publ. Circonst. Cons. perm. int. Explor. Mer 108(1):14–22.</p>
+<p>Lee, R. M. 1920. A review of the methods of age and growth determination in fishes by means of scales. Fisheries Investigations, London Series 2 4((2)):1–32.</p>
+<p>Vigliola, L., and M. G. Meekan. 2009. The back-calculation of fish growth from otoliths. Pages 174–211 <em>in</em> B. S. Green, B. D. Mapstone, G. Carlos, and G. A. Begg, editors. Tropical Fish Otoliths: Information for Assessment, Management, and Ecology. Springer.</p>
+<p>Weisberg, S. 1993. Using hard-part increment data to estimate age and environmental effects. Canadian Journal of Fisheries and Aquatic Sciences 50(6):1229–1237.</p>
+<p>Whitney, R. R., and K. D. Carlander. 1956. Interpretation of body-scale regression for computing body length of fish. Journal of Wildlife Management 20:21–27.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./lw.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Weight-Length Relationships</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./recruitment.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Recruitment and logistic model</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

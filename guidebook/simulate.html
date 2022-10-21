@@ -1,0 +1,3245 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>fishStats - 10&nbsp; Simulate Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./summary.html" rel="next">
+<link href="./basicFishPlotting.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simulate Data</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./" class="sidebar-logo-link">
+      <img src="./FAO_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">fishStats</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/lugoga/ecasData" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><strong>Installation</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Rlanguage.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>R as a Programming Language</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rstudio.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>Getting Started with RStudio</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./packages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><strong>Packages</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><strong>Data Entry and Management</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./loadingData.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><strong>Loading Data and Data Cleaning</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sample.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sample Data in R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicFishStats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>Basic Fisheries Statistics</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicFishPlotting.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Plotting Fisheries Data</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./simulate.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simulate Data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./installR.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">R language installation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./installRstudio.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title"><strong>What is RStudio?</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./installPackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Install packages in R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lw.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title"><strong>Weight-Length Relationships</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicstats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title"><strong>Basic Data Manipulations</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./recruitment.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Recruitment and logistic model</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"> <span class="header-section-number">10.1</span> Overview</a></li>
+  <li><a href="#linear-sequences" id="toc-linear-sequences" class="nav-link" data-scroll-target="#linear-sequences"> <span class="header-section-number">10.2</span> Linear Sequences</a></li>
+  <li><a href="#nonlinear-sequences" id="toc-nonlinear-sequences" class="nav-link" data-scroll-target="#nonlinear-sequences"> <span class="header-section-number">10.3</span> Nonlinear Sequences</a>
+  <ul class="collapse">
+  <li><a href="#exponential-and-logarithmic-sequences" id="toc-exponential-and-logarithmic-sequences" class="nav-link" data-scroll-target="#exponential-and-logarithmic-sequences"> <span class="header-section-number">10.3.1</span> Exponential and Logarithmic Sequences</a></li>
+  <li><a href="#logarithmic" id="toc-logarithmic" class="nav-link" data-scroll-target="#logarithmic"> <span class="header-section-number">10.3.2</span> Logarithmic</a></li>
+  <li><a href="#exponential" id="toc-exponential" class="nav-link" data-scroll-target="#exponential"> <span class="header-section-number">10.3.3</span> Exponential</a></li>
+  <li><a href="#cyclical-sequences" id="toc-cyclical-sequences" class="nav-link" data-scroll-target="#cyclical-sequences"> <span class="header-section-number">10.3.4</span> Cyclical Sequences</a></li>
+  </ul></li>
+  <li><a href="#normally-distributed-sequences" id="toc-normally-distributed-sequences" class="nav-link" data-scroll-target="#normally-distributed-sequences"> <span class="header-section-number">10.4</span> Normally-Distributed Sequences</a>
+  <ul class="collapse">
+  <li><a href="#qnorm" id="toc-qnorm" class="nav-link" data-scroll-target="#qnorm"> <span class="header-section-number">10.4.1</span> qnorm</a></li>
+  <li><a href="#rnorm" id="toc-rnorm" class="nav-link" data-scroll-target="#rnorm"> <span class="header-section-number">10.4.2</span> rnorm</a></li>
+  <li><a href="#runif" id="toc-runif" class="nav-link" data-scroll-target="#runif"> <span class="header-section-number">10.4.3</span> runif</a></li>
+  </ul></li>
+  <li><a href="#sequences-based-on-percentiles" id="toc-sequences-based-on-percentiles" class="nav-link" data-scroll-target="#sequences-based-on-percentiles"> <span class="header-section-number">10.5</span> Sequences Based on Percentiles</a></li>
+  <li><a href="#logistic-sequences" id="toc-logistic-sequences" class="nav-link" data-scroll-target="#logistic-sequences"> <span class="header-section-number">10.6</span> Logistic Sequences</a></li>
+  <li><a href="#random-sequences" id="toc-random-sequences" class="nav-link" data-scroll-target="#random-sequences"> <span class="header-section-number">10.7</span> Random Sequences</a>
+  <ul class="collapse">
+  <li><a href="#uniformly-distributed-random-sequences" id="toc-uniformly-distributed-random-sequences" class="nav-link" data-scroll-target="#uniformly-distributed-random-sequences"> <span class="header-section-number">10.7.1</span> Uniformly-Distributed Random Sequences</a></li>
+  <li><a href="#normally-distributed-random-sequences" id="toc-normally-distributed-random-sequences" class="nav-link" data-scroll-target="#normally-distributed-random-sequences"> <span class="header-section-number">10.7.2</span> Normally-Distributed Random Sequences</a></li>
+  <li><a href="#setting-the-random-seed-for-reproducible-random-numbers" id="toc-setting-the-random-seed-for-reproducible-random-numbers" class="nav-link" data-scroll-target="#setting-the-random-seed-for-reproducible-random-numbers"> <span class="header-section-number">10.7.3</span> Setting the random seed for reproducible random numbers</a></li>
+  </ul></li>
+  <li><a href="#discrete-counts-with-rpois" id="toc-discrete-counts-with-rpois" class="nav-link" data-scroll-target="#discrete-counts-with-rpois"> <span class="header-section-number">10.8</span> Discrete counts with <code>rpois()</code></a></li>
+  <li><a href="#generate-character-vectors-with-rep" id="toc-generate-character-vectors-with-rep" class="nav-link" data-scroll-target="#generate-character-vectors-with-rep"> <span class="header-section-number">10.9</span> Generate character vectors with rep()</a>
+  <ul class="collapse">
+  <li><a href="#using-letters-and-letters" id="toc-using-letters-and-letters" class="nav-link" data-scroll-target="#using-letters-and-letters"> <span class="header-section-number">10.9.1</span> Using letters and LETTERS</a></li>
+  <li><a href="#repeat-each-element-of-a-vector-with-each" id="toc-repeat-each-element-of-a-vector-with-each" class="nav-link" data-scroll-target="#repeat-each-element-of-a-vector-with-each"> <span class="header-section-number">10.9.2</span> Repeat each element of a vector with each</a></li>
+  <li><a href="#repeat-a-whole-vector-with-the-times-argument" id="toc-repeat-a-whole-vector-with-the-times-argument" class="nav-link" data-scroll-target="#repeat-a-whole-vector-with-the-times-argument"> <span class="header-section-number">10.9.3</span> Repeat a whole vector with the times argument</a></li>
+  <li><a href="#set-the-output-vector-length-with-the-length.out-argument" id="toc-set-the-output-vector-length-with-the-length.out-argument" class="nav-link" data-scroll-target="#set-the-output-vector-length-with-the-length.out-argument"> <span class="header-section-number">10.9.4</span> Set the output vector length with the length.out argument</a></li>
+  <li><a href="#repeat-each-element-a-different-number-of-times" id="toc-repeat-each-element-a-different-number-of-times" class="nav-link" data-scroll-target="#repeat-each-element-a-different-number-of-times"> <span class="header-section-number">10.9.5</span> Repeat each element a different number of times</a></li>
+  <li><a href="#combining-each-with-times" id="toc-combining-each-with-times" class="nav-link" data-scroll-target="#combining-each-with-times"> <span class="header-section-number">10.9.6</span> Combining each with times</a></li>
+  <li><a href="#combining-each-with-length.out" id="toc-combining-each-with-length.out" class="nav-link" data-scroll-target="#combining-each-with-length.out"> <span class="header-section-number">10.9.7</span> Combining each with length.out</a></li>
+  <li><a href="#creating-datasets-with-quantiative-and-categorical-variables" id="toc-creating-datasets-with-quantiative-and-categorical-variables" class="nav-link" data-scroll-target="#creating-datasets-with-quantiative-and-categorical-variables"> <span class="header-section-number">10.9.8</span> Creating datasets with quantiative and categorical variables</a></li>
+  </ul></li>
+  <li><a href="#simulate-data-with-no-differences-among-two-groups" id="toc-simulate-data-with-no-differences-among-two-groups" class="nav-link" data-scroll-target="#simulate-data-with-no-differences-among-two-groups"> <span class="header-section-number">10.10</span> Simulate data with no differences among two groups</a></li>
+  <li><a href="#simulate-data-with-a-difference-among-groups" id="toc-simulate-data-with-a-difference-among-groups" class="nav-link" data-scroll-target="#simulate-data-with-a-difference-among-groups"> <span class="header-section-number">10.11</span> Simulate data with a difference among groups</a></li>
+  <li><a href="#multiple-quantitative-variables-with-groups" id="toc-multiple-quantitative-variables-with-groups" class="nav-link" data-scroll-target="#multiple-quantitative-variables-with-groups"> <span class="header-section-number">10.12</span> Multiple quantitative variables with groups</a></li>
+  <li><a href="#repeatedly-simulate-data-with-replicate" id="toc-repeatedly-simulate-data-with-replicate" class="nav-link" data-scroll-target="#repeatedly-simulate-data-with-replicate"> <span class="header-section-number">10.13</span> Repeatedly simulate data with replicate()</a>
+  <ul class="collapse">
+  <li><a href="#simple-example-of-replicate" id="toc-simple-example-of-replicate" class="nav-link" data-scroll-target="#simple-example-of-replicate"> <span class="header-section-number">10.13.1</span> Simple example of replicate()</a></li>
+  <li><a href="#an-equivalent-for-loop-example" id="toc-an-equivalent-for-loop-example" class="nav-link" data-scroll-target="#an-equivalent-for-loop-example"> <span class="header-section-number">10.13.2</span> An equivalent for() loop example</a></li>
+  <li><a href="#using-replicate-to-repeatedly-make-a-dataset" id="toc-using-replicate-to-repeatedly-make-a-dataset" class="nav-link" data-scroll-target="#using-replicate-to-repeatedly-make-a-dataset"> <span class="header-section-number">10.13.3</span> Using replicate() to repeatedly make a dataset</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simulate Data</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="overview" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">10.1</span> Overview</h2>
+<p>There are many reasons we might want to simulate data in R, and I find being able to simulate data to be incredibly useful in my day-to-day work. But how does someone get started simulating data?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(patchwork)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">11</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>R has several tools for generating and simulating data that can be useful for testing and teaching</p>
+</section>
+<section id="linear-sequences" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="linear-sequences"><span class="header-section-number">10.2</span> Linear Sequences</h2>
+<p>Linear sequences of numbers are commonly used in R, notably for iterating through elements of data structures. For sequences of successive integers, the colon operator is usually the simplest choice. The result is all integers between the number before the colon and the number after the colon, inclusive. The sequence can be ascending or descending:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] -1  0  1  2  3  4  5  6  7  8  9 10</code></pre>
+</div>
+</div>
+<p>For sequences of real numbers or sequences that proceed in increments not equal to one use the <code>seq</code> function and specify the value of the three arguments as <code>seq(from, to, by)</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">10</span>,<span class="dv">100</span>,<span class="dv">10</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  10  20  30  40  50  60  70  80  90 100</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">90</span>,<span class="dv">90</span>,<span class="dv">30</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -90 -60 -30   0  30  60  90</code></pre>
+</div>
+</div>
+<p>For regular sequences of specific numbers the <code>rep()</code> (repeat) function can be used. The parameters are:</p>
+<p>x: the value to repeat times: the number of times to repeat that value</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">10</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1 1 1 1 1 1 1 1 1 1</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"SE"</span>, <span class="st">"NE"</span>), <span class="at">each =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "SE" "SE" "SE" "SE" "SE" "NE" "NE" "NE" "NE" "NE"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"SE"</span>, <span class="st">"NE"</span>), <span class="at">times =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "SE" "NE" "SE" "NE" "SE" "NE" "SE" "NE" "SE" "NE"</code></pre>
+</div>
+</div>
+</section>
+<section id="nonlinear-sequences" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="nonlinear-sequences"><span class="header-section-number">10.3</span> Nonlinear Sequences</h2>
+<p>Linear sequences can be transformed to nonlinear sequences of numbers using a variety of functions. Some examples are given below.</p>
+<section id="exponential-and-logarithmic-sequences" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="exponential-and-logarithmic-sequences"><span class="header-section-number">10.3.1</span> Exponential and Logarithmic Sequences</h3>
+<p>Many phenomena, such as growth, follow exponential or logarithmic curves. Natural exponential and logarithms (powers and roots of Euler’s Number) are supported with the <code>exp()</code> and <code>log()</code> functions.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="fu">exp</span>(a)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]     2.718282     7.389056    20.085537    54.598150   148.413159
+ [6]   403.428793  1096.633158  2980.957987  8103.083928 22026.465795</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-li-ex" class="anchored">
+
+<div id="jlqmmeamwd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#jlqmmeamwd .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#jlqmmeamwd .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jlqmmeamwd .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#jlqmmeamwd .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#jlqmmeamwd .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jlqmmeamwd .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jlqmmeamwd .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#jlqmmeamwd .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#jlqmmeamwd .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#jlqmmeamwd .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#jlqmmeamwd .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#jlqmmeamwd .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jlqmmeamwd .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jlqmmeamwd .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#jlqmmeamwd .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#jlqmmeamwd .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#jlqmmeamwd .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jlqmmeamwd .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#jlqmmeamwd .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#jlqmmeamwd .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jlqmmeamwd .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#jlqmmeamwd .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#jlqmmeamwd .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jlqmmeamwd .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jlqmmeamwd .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#jlqmmeamwd .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#jlqmmeamwd .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jlqmmeamwd .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jlqmmeamwd .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jlqmmeamwd .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jlqmmeamwd .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jlqmmeamwd .gt_left {
+  text-align: left;
+}
+
+#jlqmmeamwd .gt_center {
+  text-align: center;
+}
+
+#jlqmmeamwd .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#jlqmmeamwd .gt_font_normal {
+  font-weight: normal;
+}
+
+#jlqmmeamwd .gt_font_bold {
+  font-weight: bold;
+}
+
+#jlqmmeamwd .gt_font_italic {
+  font-style: italic;
+}
+
+#jlqmmeamwd .gt_super {
+  font-size: 65%;
+}
+
+#jlqmmeamwd .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#jlqmmeamwd .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#jlqmmeamwd .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#jlqmmeamwd .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#jlqmmeamwd .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#jlqmmeamwd .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#jlqmmeamwd .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table"><caption>Table 10.1:  Table of linear of sequence of number 1:10 and its natuarla exponential sequence </caption>
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Linear</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Exponential</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2.718282</td></tr>
+    <tr><td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">7.389056</td></tr>
+    <tr><td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">20.085537</td></tr>
+    <tr><td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">54.598150</td></tr>
+    <tr><td class="gt_row gt_right">5</td>
+<td class="gt_row gt_right">5</td>
+<td class="gt_row gt_right">148.413159</td></tr>
+    <tr><td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right">403.428793</td></tr>
+    <tr><td class="gt_row gt_right">7</td>
+<td class="gt_row gt_right">7</td>
+<td class="gt_row gt_right">1096.633158</td></tr>
+    <tr><td class="gt_row gt_right">8</td>
+<td class="gt_row gt_right">8</td>
+<td class="gt_row gt_right">2980.957987</td></tr>
+    <tr><td class="gt_row gt_right">9</td>
+<td class="gt_row gt_right">9</td>
+<td class="gt_row gt_right">8103.083928</td></tr>
+    <tr><td class="gt_row gt_right">10</td>
+<td class="gt_row gt_right">10</td>
+<td class="gt_row gt_right">22026.465795</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-li-ex" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="simulate_files/figure-html/fig-li-ex-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure 10.1: Plot of linear of sequence of number 1:10 and its natuaral exponential sequence</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="logarithmic" class="level3" data-number="10.3.2">
+<h3 data-number="10.3.2" class="anchored" data-anchor-id="logarithmic"><span class="header-section-number">10.3.2</span> Logarithmic</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="fu">log</span>(a)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0.0000000 0.6931472 1.0986123 1.3862944 1.6094379 1.7917595 1.9459101
+ [8] 2.0794415 2.1972246 2.3025851</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-li-log" class="anchored">
+
+<div id="wybhaxxfue" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#wybhaxxfue .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#wybhaxxfue .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wybhaxxfue .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#wybhaxxfue .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#wybhaxxfue .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wybhaxxfue .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wybhaxxfue .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#wybhaxxfue .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#wybhaxxfue .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#wybhaxxfue .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#wybhaxxfue .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#wybhaxxfue .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#wybhaxxfue .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#wybhaxxfue .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#wybhaxxfue .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#wybhaxxfue .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#wybhaxxfue .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wybhaxxfue .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#wybhaxxfue .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#wybhaxxfue .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wybhaxxfue .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#wybhaxxfue .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#wybhaxxfue .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wybhaxxfue .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wybhaxxfue .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#wybhaxxfue .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#wybhaxxfue .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wybhaxxfue .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wybhaxxfue .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wybhaxxfue .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wybhaxxfue .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wybhaxxfue .gt_left {
+  text-align: left;
+}
+
+#wybhaxxfue .gt_center {
+  text-align: center;
+}
+
+#wybhaxxfue .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#wybhaxxfue .gt_font_normal {
+  font-weight: normal;
+}
+
+#wybhaxxfue .gt_font_bold {
+  font-weight: bold;
+}
+
+#wybhaxxfue .gt_font_italic {
+  font-style: italic;
+}
+
+#wybhaxxfue .gt_super {
+  font-size: 65%;
+}
+
+#wybhaxxfue .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#wybhaxxfue .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#wybhaxxfue .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#wybhaxxfue .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#wybhaxxfue .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#wybhaxxfue .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#wybhaxxfue .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table"><caption>Table 10.2:  Table of linear of sequence of number 1:10 and its natuaral logarithmic sequence </caption>
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Linear</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Logarithmic</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0.0000000</td></tr>
+    <tr><td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0.6931472</td></tr>
+    <tr><td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">1.0986123</td></tr>
+    <tr><td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">1.3862944</td></tr>
+    <tr><td class="gt_row gt_right">5</td>
+<td class="gt_row gt_right">5</td>
+<td class="gt_row gt_right">1.6094379</td></tr>
+    <tr><td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right">1.7917595</td></tr>
+    <tr><td class="gt_row gt_right">7</td>
+<td class="gt_row gt_right">7</td>
+<td class="gt_row gt_right">1.9459101</td></tr>
+    <tr><td class="gt_row gt_right">8</td>
+<td class="gt_row gt_right">8</td>
+<td class="gt_row gt_right">2.0794415</td></tr>
+    <tr><td class="gt_row gt_right">9</td>
+<td class="gt_row gt_right">9</td>
+<td class="gt_row gt_right">2.1972246</td></tr>
+    <tr><td class="gt_row gt_right">10</td>
+<td class="gt_row gt_right">10</td>
+<td class="gt_row gt_right">2.3025851</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-li-log" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="simulate_files/figure-html/fig-li-log-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure 10.2: Table of linear of sequence of number 1:10 and its natuaral logarithmic sequence</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="exponential" class="level3" data-number="10.3.3">
+<h3 data-number="10.3.3" class="anchored" data-anchor-id="exponential"><span class="header-section-number">10.3.3</span> Exponential</h3>
+<p>Exponential sequences can be created based on any base using the carat operator <code>^</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> a<span class="sc">^</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]     1     3     9    27    81   243   729  2187  6561 19683 59049</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>bt <span class="ot">=</span> <span class="fu">tibble</span>(b) <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">data =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">rep</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">times =</span> <span class="dv">1</span>)) </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>bt <span class="sc">%&gt;%</span> </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> id, <span class="at">y =</span> data))<span class="sc">+</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)<span class="sc">+</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"values"</span>,<span class="at">breaks =</span> scales<span class="sc">::</span><span class="fu">pretty_breaks</span>(<span class="at">n =</span> <span class="dv">10</span>))<span class="sc">+</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-li-exp" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="simulate_files/figure-html/fig-li-exp-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure 10.3: Exponential sequence</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="cyclical-sequences" class="level3" data-number="10.3.4">
+<h3 data-number="10.3.4" class="anchored" data-anchor-id="cyclical-sequences"><span class="header-section-number">10.3.4</span> Cyclical Sequences</h3>
+<p>Many phenomena such as temperature or market activity occur in regularly repeating cycles. The sin() and cos() functions can be used to create cyclical sequences. The parameter is in radians (multiples of 2π), and the native pi constant can be used to convert a linear sequence to radians:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="at">length.out =</span> <span class="dv">25</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="fu">sin</span>(a <span class="sc">*</span> pi)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  0.000000e+00  7.071068e-01  1.000000e+00  7.071068e-01  1.224606e-16
+ [6] -7.071068e-01 -1.000000e+00 -7.071068e-01 -2.449213e-16  7.071068e-01
+[11]  1.000000e+00  7.071068e-01  3.673819e-16 -7.071068e-01 -1.000000e+00
+[16] -7.071068e-01 -4.898425e-16  7.071068e-01  1.000000e+00  7.071068e-01
+[21]  6.123032e-16 -7.071068e-01 -1.000000e+00 -7.071068e-01 -7.347638e-16</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-li-sin" class="anchored">
+
+<div id="fomkevjfex" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#fomkevjfex .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#fomkevjfex .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fomkevjfex .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#fomkevjfex .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#fomkevjfex .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fomkevjfex .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fomkevjfex .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#fomkevjfex .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#fomkevjfex .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#fomkevjfex .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#fomkevjfex .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#fomkevjfex .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#fomkevjfex .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#fomkevjfex .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#fomkevjfex .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#fomkevjfex .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#fomkevjfex .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fomkevjfex .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#fomkevjfex .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#fomkevjfex .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fomkevjfex .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#fomkevjfex .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#fomkevjfex .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fomkevjfex .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fomkevjfex .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#fomkevjfex .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#fomkevjfex .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fomkevjfex .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fomkevjfex .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fomkevjfex .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fomkevjfex .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fomkevjfex .gt_left {
+  text-align: left;
+}
+
+#fomkevjfex .gt_center {
+  text-align: center;
+}
+
+#fomkevjfex .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#fomkevjfex .gt_font_normal {
+  font-weight: normal;
+}
+
+#fomkevjfex .gt_font_bold {
+  font-weight: bold;
+}
+
+#fomkevjfex .gt_font_italic {
+  font-style: italic;
+}
+
+#fomkevjfex .gt_super {
+  font-size: 65%;
+}
+
+#fomkevjfex .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#fomkevjfex .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#fomkevjfex .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#fomkevjfex .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#fomkevjfex .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#fomkevjfex .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#fomkevjfex .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table"><caption>Table 10.3:  Table of linear of sequence of number 1:10 and its sin sequence </caption>
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Linear</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Sinusoid</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0.00</td>
+<td class="gt_row gt_right">0.000000e+00</td></tr>
+    <tr><td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0.25</td>
+<td class="gt_row gt_right">7.071068e-01</td></tr>
+    <tr><td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0.50</td>
+<td class="gt_row gt_right">1.000000e+00</td></tr>
+    <tr><td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">0.75</td>
+<td class="gt_row gt_right">7.071068e-01</td></tr>
+    <tr><td class="gt_row gt_right">5</td>
+<td class="gt_row gt_right">1.00</td>
+<td class="gt_row gt_right">1.224606e-16</td></tr>
+    <tr><td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right">1.25</td>
+<td class="gt_row gt_right">-7.071068e-01</td></tr>
+    <tr><td class="gt_row gt_right">7</td>
+<td class="gt_row gt_right">1.50</td>
+<td class="gt_row gt_right">-1.000000e+00</td></tr>
+    <tr><td class="gt_row gt_right">8</td>
+<td class="gt_row gt_right">1.75</td>
+<td class="gt_row gt_right">-7.071068e-01</td></tr>
+    <tr><td class="gt_row gt_right">9</td>
+<td class="gt_row gt_right">2.00</td>
+<td class="gt_row gt_right">-2.449213e-16</td></tr>
+    <tr><td class="gt_row gt_right">10</td>
+<td class="gt_row gt_right">2.25</td>
+<td class="gt_row gt_right">7.071068e-01</td></tr>
+    <tr><td class="gt_row gt_right">11</td>
+<td class="gt_row gt_right">2.50</td>
+<td class="gt_row gt_right">1.000000e+00</td></tr>
+    <tr><td class="gt_row gt_right">12</td>
+<td class="gt_row gt_right">2.75</td>
+<td class="gt_row gt_right">7.071068e-01</td></tr>
+    <tr><td class="gt_row gt_right">13</td>
+<td class="gt_row gt_right">3.00</td>
+<td class="gt_row gt_right">3.673819e-16</td></tr>
+    <tr><td class="gt_row gt_right">14</td>
+<td class="gt_row gt_right">3.25</td>
+<td class="gt_row gt_right">-7.071068e-01</td></tr>
+    <tr><td class="gt_row gt_right">15</td>
+<td class="gt_row gt_right">3.50</td>
+<td class="gt_row gt_right">-1.000000e+00</td></tr>
+    <tr><td class="gt_row gt_right">16</td>
+<td class="gt_row gt_right">3.75</td>
+<td class="gt_row gt_right">-7.071068e-01</td></tr>
+    <tr><td class="gt_row gt_right">17</td>
+<td class="gt_row gt_right">4.00</td>
+<td class="gt_row gt_right">-4.898425e-16</td></tr>
+    <tr><td class="gt_row gt_right">18</td>
+<td class="gt_row gt_right">4.25</td>
+<td class="gt_row gt_right">7.071068e-01</td></tr>
+    <tr><td class="gt_row gt_right">19</td>
+<td class="gt_row gt_right">4.50</td>
+<td class="gt_row gt_right">1.000000e+00</td></tr>
+    <tr><td class="gt_row gt_right">20</td>
+<td class="gt_row gt_right">4.75</td>
+<td class="gt_row gt_right">7.071068e-01</td></tr>
+    <tr><td class="gt_row gt_right">21</td>
+<td class="gt_row gt_right">5.00</td>
+<td class="gt_row gt_right">6.123032e-16</td></tr>
+    <tr><td class="gt_row gt_right">22</td>
+<td class="gt_row gt_right">5.25</td>
+<td class="gt_row gt_right">-7.071068e-01</td></tr>
+    <tr><td class="gt_row gt_right">23</td>
+<td class="gt_row gt_right">5.50</td>
+<td class="gt_row gt_right">-1.000000e+00</td></tr>
+    <tr><td class="gt_row gt_right">24</td>
+<td class="gt_row gt_right">5.75</td>
+<td class="gt_row gt_right">-7.071068e-01</td></tr>
+    <tr><td class="gt_row gt_right">25</td>
+<td class="gt_row gt_right">6.00</td>
+<td class="gt_row gt_right">-7.347638e-16</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-li-sin" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="simulate_files/figure-html/fig-li-sin-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure 10.4: Plot of linear of sequence of number 1:10 and its sin sequence</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="normally-distributed-sequences" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="normally-distributed-sequences"><span class="header-section-number">10.4</span> Normally-Distributed Sequences</h2>
+<p>A normally distributed sequence of numbers can be created using the qnorm() quantile function. The parameters:</p>
+<ul>
+<li>x: A linear sequence of probabilities in the range 0 to 1</li>
+<li>mean: The mean (μ)</li>
+<li>sd: The standard deviation (σ)</li>
+</ul>
+<section id="qnorm" class="level3" data-number="10.4.1">
+<h3 data-number="10.4.1" class="anchored" data-anchor-id="qnorm"><span class="header-section-number">10.4.1</span> qnorm</h3>
+<p>This function returns the value of the inverse cumulative density function (cdf) of the normal distribution given a certain random variable p, a population mean μ, and the population standard deviation σ</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.02</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="fu">qnorm</span>(<span class="at">p =</span> a, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]        -Inf -0.05374891  0.24931393  0.44522641  0.59492844  0.71844843
+ [7]  0.82501321  0.91968066  1.00554212  1.08463491  1.15837877  1.22780679
+[13]  1.29369744  1.35665459  1.41715849  1.47559949  1.53230120  1.58753687
+[19]  1.64154121  1.69451921  1.74665290  1.79810652  1.84903078  1.89956628
+[25]  1.94984642  2.00000000  2.05015358  2.10043372  2.15096922  2.20189348
+[31]  2.25334710  2.30548079  2.35845879  2.41246313  2.46769880  2.52440051
+[37]  2.58284151  2.64334541  2.70630256  2.77219321  2.84162123  2.91536509
+[43]  2.99445788  3.08031934  3.17498679  3.28155157  3.40507156  3.55477359
+[49]  3.75068607  4.05374891         Inf</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>at <span class="ot">=</span> <span class="fu">tibble</span>(a<span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>())  <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">data =</span> <span class="dv">1</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>bt <span class="ot">=</span> <span class="fu">tibble</span>(b) <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">data =</span> <span class="dv">1</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>binded <span class="ot">=</span> <span class="fu">bind_rows</span>(at,bt) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(a), <span class="at">times =</span> <span class="dv">2</span>), <span class="at">mode =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"seq"</span>, <span class="st">"qnorm"</span>), <span class="at">each =</span> <span class="fu">length</span>(a)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing non-finite values (stat_bin).</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-li-qnorm" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="simulate_files/figure-html/fig-li-qnorm-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure 10.5: Plot of linear of sequence and its normalized sequence with qnorm</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="rnorm" class="level3" data-number="10.4.2">
+<h3 data-number="10.4.2" class="anchored" data-anchor-id="rnorm"><span class="header-section-number">10.4.2</span> rnorm</h3>
+<p>When we want to generate a vector of normally distributed random variables, we use <code>rnorm</code> function and supply it with length n, a population mean μ and population standard deviation σ.</p>
+<ul>
+<li><strong>Example</strong>: In this example, with the use of the <code>rnorm()</code> function we are generating a vector of 10 normally distributed random variables with mean temperature=25 and sd=2.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">25</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 25.11446 27.24799 24.66387 26.26142 24.76491 21.62708 26.91647 27.38866
+ [9] 24.23348 25.12748</code></pre>
+</div>
+</div>
+</section>
+<section id="runif" class="level3" data-number="10.4.3">
+<h3 data-number="10.4.3" class="anchored" data-anchor-id="runif"><span class="header-section-number">10.4.3</span> runif</h3>
+<p>The runif() function generates random deviates of the uniform distribution when the minimum and maximum values are provided. The function is simply written <code>as runif(n, min = 0, max = 1)</code> . We may easily generate n number of random samples within any interval, defined by the min and the max argument.</p>
+<ul>
+<li><strong>Example</strong>: In this example, with the use of the <code>runif</code>()` function to generate a vector of 10 normally distributed random variables with minimum temperature of 23 and maximum temperature=28.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="fu">runif</span>(<span class="dv">10</span>, <span class="at">min =</span> <span class="dv">23</span>, <span class="at">max =</span> <span class="dv">28</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 25.09459 27.47837 27.65301 27.65820 25.79726 27.29496 24.75173 25.61296
+ [9] 26.14250 26.46849</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="sequences-based-on-percentiles" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="sequences-based-on-percentiles"><span class="header-section-number">10.5</span> Sequences Based on Percentiles</h2>
+<p>You will occasionally find statistical data given as percentiles. For example, in this document the CDC gives the following percentiles for the height of men in the USA:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Percentile<span class="sc">:</span> <span class="dv">5</span>     <span class="dv">10</span>    <span class="dv">15</span>    <span class="dv">25</span>    <span class="dv">50</span>    <span class="dv">75</span>    <span class="dv">85</span>    <span class="dv">90</span>    <span class="dv">95</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Height</span> (<span class="cf">in</span>)<span class="sc">:</span>    <span class="fl">64.3</span>  <span class="fl">65.4</span>  <span class="fl">66.1</span>  <span class="fl">67.2</span>  <span class="fl">69.1</span>  <span class="fl">71.2</span>  <span class="fl">72.3</span>  <span class="fl">73.0</span>  <span class="fl">74.1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This means that 5% of men are below 64.3 inches, 25% are below 67.2 inches, etc. By using a spline, it is possible to simulate a curve that fits those percentile points, then use the predict() function to create a representative sample. The CDC indicates that they based their estimates on 5,232 examined persons (sample size), which is what is simulated below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Table 12.  Height in inches for males aged 20 and over and number of examined</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># persons, mean, standard error of the mean, and selected percentiles, by race</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># and Hispanic origin and age: United States, 2011–2014</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>pheight <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">64.3</span>, <span class="fl">65.4</span>, <span class="fl">66.1</span>, <span class="fl">67.2</span>, <span class="fl">69.1</span>, <span class="fl">71.2</span>, <span class="fl">72.3</span>, <span class="fl">73.0</span>, <span class="fl">74.1</span>)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>percentile <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">25</span>, <span class="dv">50</span>, <span class="dv">75</span>, <span class="dv">85</span>, <span class="dv">90</span>, <span class="dv">95</span>)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a spline to fit those points</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>spline <span class="ot">=</span> <span class="fu">smooth.spline</span>(percentile, pheight)</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate 5,232 points that cover the range of percentiles</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>height <span class="ot">=</span> <span class="fu">predict</span>(spline, <span class="dv">100</span> <span class="sc">*</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">5232</span>) <span class="sc">/</span> <span class="dv">5233</span>)</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the simulated data</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(percentile, pheight, <span class="at">col=</span><span class="st">"blue"</span>, <span class="at">pch=</span><span class="dv">16</span>)</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(height<span class="sc">$</span>x, height<span class="sc">$</span>y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="simulate_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the descriptive statistics</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"mean = "</span>, <span class="fu">mean</span>(height<span class="sc">$</span>y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "mean =  69.1732940854836"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"stdev ="</span>, <span class="fu">sd</span>(height<span class="sc">$</span>y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "stdev = 2.82859108609513"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"stderr ="</span>, <span class="fu">sd</span>(height<span class="sc">$</span>y) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">length</span>(height<span class="sc">$</span>y)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "stderr = 0.0391053611211175"</code></pre>
+</div>
+</div>
+</section>
+<section id="logistic-sequences" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="logistic-sequences"><span class="header-section-number">10.6</span> Logistic Sequences</h2>
+<p>Phenomena like growth to the carrying capacity of an ecosystem follow a logistic curve, which can be generated using the self-starting logistic model function <code>SSlogis()</code>. The parameters are:</p>
+<ul>
+<li><code>input</code>: A linear sequence</li>
+<li><code>Asym</code>: The maximum output value (carrying capacity)</li>
+<li><code>xmid</code>: The x value that is at the middle of the curve</li>
+<li><code>scal</code>: The scaling (width) of the curve</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="fu">SSlogis</span>(<span class="at">input =</span> a, <span class="at">Asym =</span> <span class="dv">100</span>, <span class="at">xmid =</span> <span class="dv">10</span>, <span class="at">scal =</span> <span class="dv">1</span>)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  0.01233946  0.03353501  0.09110512  0.24726232  0.66928509  1.79862100
+ [7]  4.74258732 11.92029220 26.89414214 50.00000000 73.10585786 88.07970780
+[13] 95.25741268 98.20137900 99.33071491 99.75273768 99.90889488 99.96646499
+[19] 99.98766054 99.99546021</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(b, <span class="at">type=</span><span class="st">"b"</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="st">"Initial Colonization"</span>, <span class="at">pos=</span><span class="dv">4</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">11</span>, <span class="dv">50</span>, <span class="st">"High Growth"</span>, <span class="at">pos=</span><span class="dv">4</span>)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">13</span>, <span class="dv">90</span>, <span class="st">"Limit of Carrying Capacity"</span>, <span class="at">pos=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="simulate_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-li-logit" class="anchored">
+
+<div id="dvfbijxgek" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#dvfbijxgek .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#dvfbijxgek .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dvfbijxgek .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#dvfbijxgek .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#dvfbijxgek .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dvfbijxgek .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dvfbijxgek .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#dvfbijxgek .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#dvfbijxgek .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#dvfbijxgek .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#dvfbijxgek .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#dvfbijxgek .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#dvfbijxgek .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#dvfbijxgek .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#dvfbijxgek .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#dvfbijxgek .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#dvfbijxgek .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dvfbijxgek .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#dvfbijxgek .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#dvfbijxgek .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dvfbijxgek .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#dvfbijxgek .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#dvfbijxgek .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dvfbijxgek .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dvfbijxgek .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#dvfbijxgek .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#dvfbijxgek .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dvfbijxgek .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dvfbijxgek .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dvfbijxgek .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dvfbijxgek .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dvfbijxgek .gt_left {
+  text-align: left;
+}
+
+#dvfbijxgek .gt_center {
+  text-align: center;
+}
+
+#dvfbijxgek .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#dvfbijxgek .gt_font_normal {
+  font-weight: normal;
+}
+
+#dvfbijxgek .gt_font_bold {
+  font-weight: bold;
+}
+
+#dvfbijxgek .gt_font_italic {
+  font-style: italic;
+}
+
+#dvfbijxgek .gt_super {
+  font-size: 65%;
+}
+
+#dvfbijxgek .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#dvfbijxgek .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#dvfbijxgek .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#dvfbijxgek .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#dvfbijxgek .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#dvfbijxgek .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#dvfbijxgek .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table"><caption>Table 10.4:  Table of linear of sequence of number 1:10 and its logistic sequence </caption>
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Linear</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Logit</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0.01233946</td></tr>
+    <tr><td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0.03353501</td></tr>
+    <tr><td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">0.09110512</td></tr>
+    <tr><td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">0.24726232</td></tr>
+    <tr><td class="gt_row gt_right">5</td>
+<td class="gt_row gt_right">5</td>
+<td class="gt_row gt_right">0.66928509</td></tr>
+    <tr><td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right">1.79862100</td></tr>
+    <tr><td class="gt_row gt_right">7</td>
+<td class="gt_row gt_right">7</td>
+<td class="gt_row gt_right">4.74258732</td></tr>
+    <tr><td class="gt_row gt_right">8</td>
+<td class="gt_row gt_right">8</td>
+<td class="gt_row gt_right">11.92029220</td></tr>
+    <tr><td class="gt_row gt_right">9</td>
+<td class="gt_row gt_right">9</td>
+<td class="gt_row gt_right">26.89414214</td></tr>
+    <tr><td class="gt_row gt_right">10</td>
+<td class="gt_row gt_right">10</td>
+<td class="gt_row gt_right">50.00000000</td></tr>
+    <tr><td class="gt_row gt_right">11</td>
+<td class="gt_row gt_right">11</td>
+<td class="gt_row gt_right">73.10585786</td></tr>
+    <tr><td class="gt_row gt_right">12</td>
+<td class="gt_row gt_right">12</td>
+<td class="gt_row gt_right">88.07970780</td></tr>
+    <tr><td class="gt_row gt_right">13</td>
+<td class="gt_row gt_right">13</td>
+<td class="gt_row gt_right">95.25741268</td></tr>
+    <tr><td class="gt_row gt_right">14</td>
+<td class="gt_row gt_right">14</td>
+<td class="gt_row gt_right">98.20137900</td></tr>
+    <tr><td class="gt_row gt_right">15</td>
+<td class="gt_row gt_right">15</td>
+<td class="gt_row gt_right">99.33071491</td></tr>
+    <tr><td class="gt_row gt_right">16</td>
+<td class="gt_row gt_right">16</td>
+<td class="gt_row gt_right">99.75273768</td></tr>
+    <tr><td class="gt_row gt_right">17</td>
+<td class="gt_row gt_right">17</td>
+<td class="gt_row gt_right">99.90889488</td></tr>
+    <tr><td class="gt_row gt_right">18</td>
+<td class="gt_row gt_right">18</td>
+<td class="gt_row gt_right">99.96646499</td></tr>
+    <tr><td class="gt_row gt_right">19</td>
+<td class="gt_row gt_right">19</td>
+<td class="gt_row gt_right">99.98766054</td></tr>
+    <tr><td class="gt_row gt_right">20</td>
+<td class="gt_row gt_right">20</td>
+<td class="gt_row gt_right">99.99546021</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-li-logit" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="simulate_files/figure-html/fig-li-logit-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure 10.6: Plot of linear of sequence of number 1:10 and its logistic sequence</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">60</span>, <span class="at">mean =</span> <span class="dv">44</span>, <span class="at">sd =</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span> <span class="fu">sort</span>()</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">60</span>, <span class="at">min =</span> <span class="dv">20</span>, <span class="at">max =</span> <span class="dv">80</span>) <span class="sc">%&gt;%</span> <span class="fu">sort</span>()</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="fu">SSlogis</span>(<span class="at">input =</span> a, <span class="at">Asym =</span> <span class="dv">120</span>, <span class="at">xmid =</span> <span class="dv">50</span>, <span class="at">scal =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="simulate_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="random-sequences" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="random-sequences"><span class="header-section-number">10.7</span> Random Sequences</h2>
+<p>An easy way to generate numeric data is to pull random numbers from some distribution. This can be done via the functions for generating random deviates. These functions always start with r (for “random”).</p>
+<p>The basic distributions that I use the most for generating random numbers are the normal (<code>rnorm()</code>) and uniform (<code>runif()</code>) distributions.</p>
+<p>There are many other distributions available as part of the stats package (e.g., binomial, F, log normal, beta, exponential, Gamma) and, as you can imagine, even more available in add-on packages. I recently needed to generate data from the Tweedie distribution to test a modeling tool, which I could do via package tweedie.</p>
+<p>The r functions for a chosen distribution all work basically the same way. We define how many random numbers we want to generate in the first argument (n) and then define the parameters for the distribution we want to draw from. This is easier to see with practice, so let’s get started.</p>
+<p>Random sequences of numbers are useful for testing analysis code, and are essential for formal statistical techniques like Monte Carlo methods.</p>
+<p>Random sequences of numbers do not follow a regular pattern. While computers are deterministic machines that cannot generate truly random sequences of numbers, there are a variety of algorithms that generate pseudo-random sequences that are close enough to random to meet the needs of researchers.</p>
+<section id="uniformly-distributed-random-sequences" class="level3" data-number="10.7.1">
+<h3 data-number="10.7.1" class="anchored" data-anchor-id="uniformly-distributed-random-sequences"><span class="header-section-number">10.7.1</span> Uniformly-Distributed Random Sequences</h3>
+<p>The most basic random number generating function is the <code>runif()</code> function, which generates a random sequence in a uniform distribution (the unif part of the name). The parameters:</p>
+<ul>
+<li><p>n: The count of numbers to generate</p></li>
+<li><p>min: The minimum possible value in the sequence (defaults to 0)</p></li>
+<li><p>max: The maximum possible value in the sequence (defaults to 1)</p></li>
+<li><p>Example: Generate sequence of nile perch that has minimum value of 20 and maximum value of 120</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">min =</span> <span class="dv">20</span>, <span class="at">max =</span> <span class="dv">80</span>) <span class="sc">%&gt;%</span> <span class="fu">sort</span>()</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 35.90107 35.90196 38.74689 48.87739 53.87543 55.66059 62.49742 70.38607
+ [9] 74.11246 74.79129</code></pre>
+</div>
+</div>
+<p>Note that the <code>runif</code> function help us when want to simulate sample when a minimum and maximum value of that population is given.</p>
+</section>
+<section id="normally-distributed-random-sequences" class="level3" data-number="10.7.2">
+<h3 data-number="10.7.2" class="anchored" data-anchor-id="normally-distributed-random-sequences"><span class="header-section-number">10.7.2</span> Normally-Distributed Random Sequences</h3>
+<p>I use <code>rnorm()</code> a lot, sometimes with good reason and other times when I need some numbers and I really don’t care too much about what they are.</p>
+<p>There are three arguments to <code>rnorm()</code>. From the Usage section of the documentation:</p>
+<p>rnorm(n, mean = 0, sd = 1)</p>
+<p>The <code>n</code> argument is the number of observations we want to generate. The <code>mean</code> and <code>sd</code> arguments show what the default values of the parameters are (note that sd is the standard deviation, not the variance). Not all r functions have defaults to the parameter arguments like this.</p>
+<p>To get 10 random numbers from a normal distribution we can write code like:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">55</span>,<span class="at">sd =</span> <span class="dv">8</span>)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 50.19792 72.49866 67.26089 53.11440 46.78863 49.31675 57.05507 53.02646
+ [9] 52.21966 47.38705</code></pre>
+</div>
+</div>
+<p>You notes that the `rnorm`` function help us to simulate sample when a statistic parameter mean and standard deviation of that population is given.</p>
+</section>
+<section id="setting-the-random-seed-for-reproducible-random-numbers" class="level3" data-number="10.7.3">
+<h3 data-number="10.7.3" class="anchored" data-anchor-id="setting-the-random-seed-for-reproducible-random-numbers"><span class="header-section-number">10.7.3</span> Setting the random seed for reproducible random numbers</h3>
+<p>Second, if we run this code again we’ll get different numbers.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">55</span>,<span class="at">sd =</span> <span class="dv">8</span>)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 54.63978 48.72076 41.65646 51.95819 62.35197 50.39722 59.86371 42.05694
+ [9] 54.55550 59.15526</code></pre>
+</div>
+</div>
+<p>To get reproducible random numbers we need to set the seed via <code>set.seed()</code>.</p>
+<p>Making sure someone else will be able to exactly reproduce your results when running the same code can be desirable in teaching. It is also is useful when making an example dataset to demonstrate a coding issue, like if you were asking a code question on Stack Overflow.</p>
+<p>You’ll also see me set the seed when I’m making a function for a simulation and I want to make sure it works correctly. Otherwise in most simulations we don’t actually want or need to set the seed.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">55</span>,<span class="at">sd =</span> <span class="dv">8</span>)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 50.51619 53.15858 67.46967 55.56407 56.03430 68.72052 58.68733 44.87951
+ [9] 49.50518 51.43470</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="discrete-counts-with-rpois" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="discrete-counts-with-rpois"><span class="header-section-number">10.8</span> Discrete counts with <code>rpois()</code></h2>
+<p>Let’s look at one last function for generating random numbers, this time for generating discrete integers (including 0) from a Poisson distribution with <code>rpois()</code>.</p>
+<p>I use <code>rpois()</code> for generating counts for creating data to be fit with generalized linear models. This function has also helped me gain a better understanding of the shape of Poisson distributions with different means.</p>
+<p>The Poisson distribution is a single parameter distribution. The function looks like:</p>
+<p>rpois(n, lambda)</p>
+<p>The single parameter argument, lambda, is the mean. It has no default setting so must always be defined by the user.</p>
+<p>Let’s generate five values from a Poisson distribution with a mean of 2.5. Note that mean of the Poisson distribution can be any non-negative value (i.e., it doesn’t have to be an integer) even though the observed values will be discrete integers.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rpois</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">lambda =</span> <span class="fl">2.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4 3 3 7 3</code></pre>
+</div>
+</div>
+<p><em>Example of using the simulated numbers from <code>rpois()</code></em> Let’s explore the Poisson distribution a little more, seeing how the distribution changes when the mean of the distribution changes. Being able to look at how the Poisson distribution changes with the mean via simulation helped me understand the distribution better, including why it so often does a poor job modeling ecological count data.</p>
+<p>We’ll draw 100 values from a Poisson distribution with a mean of 5. We’ll name this vector y and take a look at a summary of those values.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">rpois</span>(<span class="dv">100</span>, <span class="at">lambda =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The vector of values we simulated here fall between 1 and 11.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   0.00    3.00    5.00    4.87    6.00   10.00 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="simulate_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Let’s do the same thing for a Poisson distribution with a mean of 100. The range of values is pretty narrow; there are no values even remotely close to 0.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">rpois</span>(<span class="dv">100</span>, <span class="at">lambda =</span> <span class="dv">100</span>)</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  76.00   94.75  100.00  100.62  106.00  123.00 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="simulate_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>An alternative to the Poisson distribution for discrete integers is the negative binomial distribution. Packages MASS has a function called rnegbin() for random number generation from the negative binomial distribution.</p>
+</section>
+<section id="generate-character-vectors-with-rep" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="generate-character-vectors-with-rep"><span class="header-section-number">10.9</span> Generate character vectors with rep()</h2>
+<p>Quantitative variables are great, but in simulations we’re often going to need categorical variables, as well.</p>
+<p>In my own work these are usually sort of “grouping” or “treatment” variable, with multiple individuals/observations per group/treatment. This means I need to have repetitions of each character value. The rep() function is one way to avoid having to write out an entire vector manually. It’s for replicating elements of vectors and lists.</p>
+<section id="using-letters-and-letters" class="level3" data-number="10.9.1">
+<h3 data-number="10.9.1" class="anchored" data-anchor-id="using-letters-and-letters"><span class="header-section-number">10.9.1</span> Using letters and LETTERS</h3>
+<p>The first argument of rep() is the vector to be repeated. One option is to write out the character vector you want to repeat. You can also get a simple character vector through the use of letters or LETTERS. These are built in constants in R. letters is the 26 lowercase letters of the Roman alphabet and LETTERS is the 26 uppercase letters.</p>
+<p>Letters can be pulled out via the extract brackets ([). I use these built-in constants for pure convenience when I need to make a basic categorical vector and it doesn’t matter what form those categories take. I find it more straightforward to type out the word and brackets than a vector of characters (complete with all those pesky quotes and such 😆).</p>
+<p>Here’s the first two letters.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "a" "b"</code></pre>
+</div>
+</div>
+<p>And the last 17 LETTERS.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>LETTERS[<span class="dv">10</span><span class="sc">:</span><span class="dv">26</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z"</code></pre>
+</div>
+</div>
+</section>
+<section id="repeat-each-element-of-a-vector-with-each" class="level3" data-number="10.9.2">
+<h3 data-number="10.9.2" class="anchored" data-anchor-id="repeat-each-element-of-a-vector-with-each"><span class="header-section-number">10.9.2</span> Repeat each element of a vector with each</h3>
+<p>There are three arguments that help us repeat the values in the vector in <code>rep()</code> with different patterns: each, times, and length.out. These can be used individually or in combination.</p>
+<p>With each we repeat each unique character in the vector the defined number of times. The replication is done “elementwise”, so the repeats of each unique character are all in a row.</p>
+<p>Let’s repeat two characters three times each. The resulting vector is 6 observations long.</p>
+<p>This is an example of how I might make a grouping variable for simulating data to be used in a two-sample analysis.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">each =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "a" "a" "a" "b" "b" "b"</code></pre>
+</div>
+</div>
+</section>
+<section id="repeat-a-whole-vector-with-the-times-argument" class="level3" data-number="10.9.3">
+<h3 data-number="10.9.3" class="anchored" data-anchor-id="repeat-a-whole-vector-with-the-times-argument"><span class="header-section-number">10.9.3</span> Repeat a whole vector with the times argument</h3>
+<p>The times argument can be used when we want to repeat the whole vector rather than repeating it elementwise.</p>
+<p>We’ll make a two-group variable again, but this time we’ll change the repeating pattern of the values in the variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">times =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "a" "b" "a" "b" "a" "b"</code></pre>
+</div>
+</div>
+</section>
+<section id="set-the-output-vector-length-with-the-length.out-argument" class="level3" data-number="10.9.4">
+<h3 data-number="10.9.4" class="anchored" data-anchor-id="set-the-output-vector-length-with-the-length.out-argument"><span class="header-section-number">10.9.4</span> Set the output vector length with the length.out argument</h3>
+<p>The length.out argument has rep() repeat the whole vector. However, it repeats the vector only until the defined length is reached. Using length.out is another way to get unbalanced groups.</p>
+<p>Rather than defining the number of repeats like we did with each and times we define the length of the output vector.</p>
+<p>Here we’ll make a two-group variable of length 5. This means the second group will have one less value than the first.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">length.out =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "a" "b" "a" "b" "a"</code></pre>
+</div>
+</div>
+</section>
+<section id="repeat-each-element-a-different-number-of-times" class="level3" data-number="10.9.5">
+<h3 data-number="10.9.5" class="anchored" data-anchor-id="repeat-each-element-a-different-number-of-times"><span class="header-section-number">10.9.5</span> Repeat each element a different number of times</h3>
+<p>Unlike each and length.out, we can use times with a vector of values. This allows us to repeat each element of the character vector a different number of times. This is one way to simulate unbalanced groups.</p>
+<p>Using times with a vector repeats each element like each does. I found this a little confusing as it makes it harder to remember which argument repeats “elementwise” and which “vectorwise”. But length.out always repeats “vectorwise”, so that’s something.</p>
+<p>Let’s repeat the first element twice and the second four times.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">times =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "a" "a" "b" "b" "b" "b"</code></pre>
+</div>
+</div>
+</section>
+<section id="combining-each-with-times" class="level3" data-number="10.9.6">
+<h3 data-number="10.9.6" class="anchored" data-anchor-id="combining-each-with-times"><span class="header-section-number">10.9.6</span> Combining each with times</h3>
+<p>As your simulation situation get more complicated, like if you are simulating data from a blocked design or with multiple sizes of experimental units, you may need more complicated patterns for your categorical variable. The each argument can be combined with times to first repeat each value elementwise (via each) and then repeat that whole pattern (via times).</p>
+<p>When using times this way it will only take a single value and not a vector.</p>
+<p>Let’s repeat each value twice, 3 times.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">each =</span> <span class="dv">2</span>, <span class="at">times =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "a" "a" "b" "b" "a" "a" "b" "b" "a" "a" "b" "b"</code></pre>
+</div>
+</div>
+</section>
+<section id="combining-each-with-length.out" class="level3" data-number="10.9.7">
+<h3 data-number="10.9.7" class="anchored" data-anchor-id="combining-each-with-length.out"><span class="header-section-number">10.9.7</span> Combining each with length.out</h3>
+<p>Similarly we can use each with length.out. This can lead to some imbalance.</p>
+<p>Here we’ll repeat the two values twice each and then repeat that pattern until we hit a total final vector length of 7.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">each =</span> <span class="dv">2</span>, <span class="at">length.out =</span> <span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "a" "a" "b" "b" "a" "a" "b"</code></pre>
+</div>
+</div>
+<p>Note you can’t use length.out and times together (if you try, length.out will be given priority and times ignored).</p>
+</section>
+<section id="creating-datasets-with-quantiative-and-categorical-variables" class="level3" data-number="10.9.8">
+<h3 data-number="10.9.8" class="anchored" data-anchor-id="creating-datasets-with-quantiative-and-categorical-variables"><span class="header-section-number">10.9.8</span> Creating datasets with quantiative and categorical variables</h3>
+<p>We now have some tools for creating quantitative data as well as categorical. Which means it’s time to make some datasets! We’ll create several simple ones to get the general idea.</p>
+</section>
+</section>
+<section id="simulate-data-with-no-differences-among-two-groups" class="level2" data-number="10.10">
+<h2 data-number="10.10" class="anchored" data-anchor-id="simulate-data-with-no-differences-among-two-groups"><span class="header-section-number">10.10</span> Simulate data with no differences among two groups</h2>
+<p>Let’s start by simulating data that we would use in a simple two-sample analysis with no difference between groups. We’ll make a total of 6 observations, three in each group.</p>
+<p>We’ll be using the tools we reviewed above but will now name the output and combine them into a data.frame. This last step isn’t always necessary, but can help you keep things organized.</p>
+<p>First we’ll make separate vectors for the continuous and categorical data and then bind them together via data.frame().</p>
+<p>Notice there is no need to use cbind() here, which is commonly done by R beginners (I know I did!). Instead we can use data.frame() directly.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>group <span class="ot">=</span> <span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">each =</span> <span class="dv">3</span>)</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>response <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">6</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(group,  response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  group    response
+1     a -0.49929202
+2     a  0.21444531
+3     a -0.32468591
+4     b  0.09458353
+5     b -0.89536336
+6     b -1.31080153</code></pre>
+</div>
+</div>
+<p>When I make a data.frame like this I prefer to make my vectors and the data.frame simultaneously to avoid having a lot of variables cluttering up my R Environment.</p>
+<p>I often teach/blog with all the steps clearly delineated as I think it’s easier when you are starting out, so (as always) use the method that works for you.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">each =</span> <span class="dv">3</span>),</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">response =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">6</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  group   response
+1     a  1.9972134
+2     a  0.6007088
+3     a -1.2512714
+4     b -0.6111659
+5     b -1.1854801
+6     b  2.1988103</code></pre>
+</div>
+</div>
+<p>Now let’s add another categorical variable to this dataset.</p>
+<p>Say we are in a situation involving two factors, not one. We have a single observations for every combination of the two factors (i.e., the two factors are crossed).</p>
+<p>The second factor, which we’ll call factor, will take on the values “C”, “D”, and “E”.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>LETTERS[<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "C" "D" "E"</code></pre>
+</div>
+</div>
+<p>We need to repeat the values in a way that every combination of group and factor is present in the dataset exactly one time.</p>
+<p>Remember the group factor is repeated elementwise.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">each =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "a" "a" "a" "b" "b" "b"</code></pre>
+</div>
+</div>
+<p>We need to repeat the three values twice. But what argument do we use in rep() to do so?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(LETTERS[<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>], ?)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Does each work?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(LETTERS[<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>], <span class="at">each =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "C" "C" "D" "D" "E" "E"</code></pre>
+</div>
+</div>
+<p>No, if we use each then each element is repeated twice and some of the combinations of group and the new variable will be missing.</p>
+<p>This is a job for the times or length.out arguments, so the whole vector is repeated. We can repeat the whole vector twice using times, or via length.out = 6. I decided to do the former.</p>
+<p>In the result below we can see every combination of the two factors is present once.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">each =</span> <span class="dv">3</span>),</span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">factor =</span> <span class="fu">rep</span>(LETTERS[<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>], <span class="at">times =</span> <span class="dv">2</span>),</span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">response =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">6</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  group factor   response
+1     a      C  1.3124130
+2     a      D -0.2651451
+3     a      E  0.5431941
+4     b      C -0.4143399
+5     b      D -0.4762469
+6     b      E -0.7886028</code></pre>
+</div>
+</div>
+</section>
+<section id="simulate-data-with-a-difference-among-groups" class="level2" data-number="10.11">
+<h2 data-number="10.11" class="anchored" data-anchor-id="simulate-data-with-a-difference-among-groups"><span class="header-section-number">10.11</span> Simulate data with a difference among groups</h2>
+<p>The dataset above is one with “no difference” among groups. What if we want data where the means are different between groups? Let’s make two groups of three observations where the mean of one group is 5 and the other is 10. The two groups have a shared variance (and so standard deviation) of 1.</p>
+<p>Remembering how rnorm() works with a vector of means is key here. The function draws iteratively from each distribution.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>response <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">6</span>, <span class="at">mean =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">10</span>), <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>response</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  4.405383 11.650907  4.945972 10.119245  5.243687 11.232476</code></pre>
+</div>
+</div>
+<p>How do we get the group pattern correct?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>group <span class="ot">=</span> <span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], ?)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We need to repeat the whole vector three times instead of elementwise.</p>
+<p>To get the groups in the correct order we need to use times or length.out in rep(). With length.out we define the output length of the vector, which is 6. Alternatively we could use times = 3 to repeat the whole vector 3 times.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>group <span class="ot">=</span> <span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">length.out =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>These can then be combined into a data.frame. Working out this process is another reason why sometimes we build each vector separately prior to combining them into a data.frame.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(group,  response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  group  response
+1     a  4.405383
+2     b 11.650907
+3     a  4.945972
+4     b 10.119245
+5     a  5.243687
+6     b 11.232476</code></pre>
+</div>
+</div>
+</section>
+<section id="multiple-quantitative-variables-with-groups" class="level2" data-number="10.12">
+<h2 data-number="10.12" class="anchored" data-anchor-id="multiple-quantitative-variables-with-groups"><span class="header-section-number">10.12</span> Multiple quantitative variables with groups</h2>
+<p>For our last dataset we’ll have two groups, with 10 observations per group.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(LETTERS[<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">each =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "C" "C" "C" "C" "C" "C" "C" "C" "C" "C" "D" "D" "D" "D" "D" "D" "D" "D" "D"
+[20] "D"</code></pre>
+</div>
+</div>
+<p>Let’s make a dataset that has two quantitative variables, unrelated to both each other and the groups. One variable ranges from 10 and 15 and one from 100 and 150.</p>
+<p>How many observations should we draw from each uniform distribution?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="at">n =</span> ?, <span class="at">min =</span> <span class="dv">10</span>, <span class="at">max =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We had 2 groups with 10 observations each and 2*10 = 20. So we need to use n = 20 in runif().</p>
+<p>Here is the dataset made in a single step.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">rep</span>(LETTERS[<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">each =</span> <span class="dv">10</span>),</span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">min =</span> <span class="dv">10</span>, <span class="at">max =</span> <span class="dv">15</span>),</span>
+<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">min =</span> <span class="dv">100</span>, <span class="at">max =</span> <span class="dv">150</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   group        x        y
+1      C 11.51452 138.0200
+2      C 11.94102 107.3542
+3      C 10.80238 117.9028
+4      C 14.31276 133.6666
+5      C 14.76551 126.1911
+6      C 12.81822 117.4901
+7      C 11.64774 112.0265
+8      C 14.98309 102.9096
+9      C 11.17410 111.8310
+10     C 13.06336 144.5039
+11     D 10.54089 140.5914
+12     D 12.43516 137.3758
+13     D 10.49723 107.7456
+14     D 10.80583 106.2371
+15     D 11.41496 148.7363
+16     D 12.91936 121.8065
+17     D 13.65854 123.2008
+18     D 10.82760 108.2649
+19     D 14.33234 129.2468
+20     D 13.54287 113.5389</code></pre>
+</div>
+</div>
+<p>What happens if we get the number wrong? If we’re lucky we get an error that will help us troubleshoot the problem.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">rep</span>(LETTERS[<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">each =</span> <span class="dv">10</span>),</span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">15</span>, <span class="at">min =</span> <span class="dv">10</span>, <span class="at">max =</span> <span class="dv">15</span>),</span>
+<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">15</span>, <span class="at">min =</span> <span class="dv">100</span>, <span class="at">max =</span> <span class="dv">150</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>But if we get things wrong and the number we use happens to go into the number we need evenly, R will recycle the vector to the end of the data.frame().</p>
+<p>This is a hard mistake to catch. If you look carefully through the output below you can see that the continuous variables start to repeat on line 10 because I used n = 10 instead of n = 20.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">rep</span>(LETTERS[<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">each =</span> <span class="dv">10</span>),</span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">min =</span> <span class="dv">10</span>, <span class="at">max =</span> <span class="dv">15</span>),</span>
+<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">min =</span> <span class="dv">100</span>, <span class="at">max =</span> <span class="dv">150</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   group        x        y
+1      C 11.15048 131.3573
+2      C 13.45604 100.0233
+3      C 11.41426 110.8622
+4      C 14.05199 135.2436
+5      C 10.46958 110.7583
+6      C 14.11015 140.6967
+7      C 12.13714 115.3882
+8      C 13.77944 134.3871
+9      C 13.31193 146.6341
+10     C 12.22264 105.7890
+11     D 11.15048 131.3573
+12     D 13.45604 100.0233
+13     D 11.41426 110.8622
+14     D 14.05199 135.2436
+15     D 10.46958 110.7583
+16     D 14.11015 140.6967
+17     D 12.13714 115.3882
+18     D 13.77944 134.3871
+19     D 13.31193 146.6341
+20     D 12.22264 105.7890</code></pre>
+</div>
+</div>
+</section>
+<section id="repeatedly-simulate-data-with-replicate" class="level2" data-number="10.13">
+<h2 data-number="10.13" class="anchored" data-anchor-id="repeatedly-simulate-data-with-replicate"><span class="header-section-number">10.13</span> Repeatedly simulate data with replicate()</h2>
+<p>The replicate() function is a real workhorse when making repeated simulations. It is a member of the apply family in R, and is specifically made (per the documentation) for the repeated evaluation of an expression (which will usually involve random number generation).</p>
+<p>We want to repeatedly simulate data that involves random number generation, so that sounds like a useful tool.</p>
+<p>The <code>replicate()</code> function takes three arguments:</p>
+<p><code>n</code>, which is the number of replications to perform. This is to set the number of repeated runs we want. <code>expr</code>, the expression that should be run repeatedly. This is often a function. simplify, which controls the type of output the results of expr are saved into. Use simplify = FALSE to get output saved into a list instead of in an array.</p>
+<section id="simple-example-of-replicate" class="level3" data-number="10.13.1">
+<h3 data-number="10.13.1" class="anchored" data-anchor-id="simple-example-of-replicate"><span class="header-section-number">10.13.1</span> Simple example of replicate()</h3>
+<p>Let’s say we want to simulate some values from a normal distribution, which we can do using the rnorm() function as above. But now instead of drawing some number of values from a distribution one time we want to do it many times. This could be something we’d do when demonstrating the central limit theorem, for example.</p>
+<p>Doing the random number generation many times is where replicate() comes in. It allows us to run the function in expr exactly n times.</p>
+<p>Here I’ll generate 5 values from a standard normal distribution three times. Notice the addition of simplify = FALSE to get a list as output.</p>
+<p>The output below is a list of three vectors. Each vector is from a unique run of the function, so contains five random numbers drawn from the normal distribution with a mean of 0 and standard deviation of 1.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">16</span>)</span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">replicate</span>(<span class="at">n =</span> <span class="dv">3</span>, </span>
+<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">expr =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>), </span>
+<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">simplify =</span> <span class="cn">FALSE</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1]  0.4764134 -0.1253800  1.0962162 -1.4442290  1.1478293
+
+[[2]]
+[1] -0.46841204 -1.00595059  0.06356268  1.02497260  0.57314202
+
+[[3]]
+[1]  1.8471821  0.1119334 -0.7460373  1.6582137  0.7217206</code></pre>
+</div>
+</div>
+<p>Note if I don’t use simplify = FALSE I will get a matrix of values instead of a list. Each column in the matrix is the output from one run of the function.</p>
+<p>In this case there will be three columns in the output, one for each run, and 5 rows. This can be a useful output type for some simulations. I focus on list output throughout the rest of this post only because that’s what I have been using recently for simulations.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">16</span>)</span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a><span class="fu">replicate</span>(<span class="at">n =</span> <span class="dv">3</span>, </span>
+<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">expr =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           [,1]        [,2]       [,3]
+[1,]  0.4764134 -0.46841204  1.8471821
+[2,] -0.1253800 -1.00595059  0.1119334
+[3,]  1.0962162  0.06356268 -0.7460373
+[4,] -1.4442290  1.02497260  1.6582137
+[5,]  1.1478293  0.57314202  0.7217206</code></pre>
+</div>
+</div>
+</section>
+<section id="an-equivalent-for-loop-example" class="level3" data-number="10.13.2">
+<h3 data-number="10.13.2" class="anchored" data-anchor-id="an-equivalent-for-loop-example"><span class="header-section-number">10.13.2</span> An equivalent for() loop example</h3>
+<p>A for() loop can be used in place of replicate() for simulations. With time and practice I’ve found replicate() to be much more convenient in terms of writing the code. However, in my experience some folks find for() loops intuitive when they are starting out in R. I think it’s because for() loops are more explicit on the looping process: the user can see the values that i takes and the output for each i iteration is saved into the output object because the code is written out explicitly.</p>
+<p>In my example I’ll save the output of each iteration of the loop into a list called list1. I initialize this as an empty list prior to starting the loop. To match what I did with replicate() I do three iterations of the loop (i in 1:3), drawing 5 values via rnorm() each time.</p>
+<p>The result is identical to my replicate() code above. It took a little more code to do it but the process is very clear since it is explicitly written out.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">16</span>)</span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a>list1 <span class="ot">=</span> <span class="fu">list</span>() <span class="co"># Make an empty list to save output in</span></span>
+<span id="cb109-4"><a href="#cb109-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) { <span class="co"># Indicate number of iterations with "i"</span></span>
+<span id="cb109-5"><a href="#cb109-5" aria-hidden="true" tabindex="-1"></a>    list1[[i]] <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># Save output in list for each iteration</span></span>
+<span id="cb109-6"><a href="#cb109-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb109-7"><a href="#cb109-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-8"><a href="#cb109-8" aria-hidden="true" tabindex="-1"></a>list1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1]  0.4764134 -0.1253800  1.0962162 -1.4442290  1.1478293
+
+[[2]]
+[1] -0.46841204 -1.00595059  0.06356268  1.02497260  0.57314202
+
+[[3]]
+[1]  1.8471821  0.1119334 -0.7460373  1.6582137  0.7217206</code></pre>
+</div>
+</div>
+</section>
+<section id="using-replicate-to-repeatedly-make-a-dataset" class="level3" data-number="10.13.3">
+<h3 data-number="10.13.3" class="anchored" data-anchor-id="using-replicate-to-repeatedly-make-a-dataset"><span class="header-section-number">10.13.3</span> Using replicate() to repeatedly make a dataset</h3>
+<p>Earlier we were making datasets with random numbers and some grouping variables. Our code looked like:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">each =</span> <span class="dv">3</span>),</span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">response =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">6</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  group   response
+1     a -1.6630805
+2     a  0.5759095
+3     a  0.4727601
+4     b -0.5427317
+5     b  1.1276871
+6     b -1.6477976</code></pre>
+</div>
+</div>
+<p>We could put this process as the expr argument in replicate() to get many simulated datasets. I would do something like this if I wanted to compare the long-run performance of two different statistical tools using the exact same random datasets.</p>
+<p>I’ll replicate things 3 times again to easily see the output. I still use simplify = FALSE to get things into a list.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>simlist <span class="ot">=</span> <span class="fu">replicate</span>(<span class="at">n =</span> <span class="dv">3</span>, </span>
+<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">expr =</span> <span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">each =</span> <span class="dv">3</span>),</span>
+<span id="cb113-3"><a href="#cb113-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">response =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">6</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) ),</span>
+<span id="cb113-4"><a href="#cb113-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can see this result is a list of three data.frames.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(simlist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 3
+ $ :'data.frame':   6 obs. of  2 variables:
+  ..$ group   : chr [1:6] "a" "a" "a" "b" ...
+  ..$ response: num [1:6] -0.314 -0.183 1.47 -0.866 1.527 ...
+ $ :'data.frame':   6 obs. of  2 variables:
+  ..$ group   : chr [1:6] "a" "a" "a" "b" ...
+  ..$ response: num [1:6] 1.03 0.84 0.217 -0.673 0.133 ...
+ $ :'data.frame':   6 obs. of  2 variables:
+  ..$ group   : chr [1:6] "a" "a" "a" "b" ...
+  ..$ response: num [1:6] -0.943 -1.022 0.281 0.545 0.131 ...</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>simlist[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  group   response
+1     a -0.3141739
+2     a -0.1826816
+3     a  1.4704785
+4     b -0.8658988
+5     b  1.5274670
+6     b  1.0541781</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./basicFishPlotting.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Plotting Fisheries Data</strong></span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./summary.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summary</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

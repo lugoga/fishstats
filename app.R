@@ -60,7 +60,7 @@ ln.stock = np %>%
 
 
 ui = navbarPage(
-  title = "fishStats", theme = bslib::bs_theme(version = 5, bootswatch = "journal"), collapsible = TRUE,
+  title = "R4Fs", theme = bslib::bs_theme(version = 5, bootswatch = "journal"), collapsible = TRUE,
   # user interface ----
   ## home panel----
   tabPanel(title = "Home",
@@ -120,25 +120,23 @@ ui = navbarPage(
            ),
            fluidRow(
              column(width = 1),
-             column(width = 5,
-                    tags$p("The app was inspired by research into gender bias in preaching, and was created as a user-friendly tool for people writing speeches, sermons or other public addresses who wanted to reflect on potential biases in their texts. The graphs can all be interpreted intuitively, and are accompanied by clear explanatory text that does not require specialist knowledge.")
+             column(width = 8,
+                    tags$p("People fish to generate a catch, whether they are on the deck of a megatrawler in the frigid waters of the North Pacific, in a canoe along an African coast, or even walking with their children on a reef flat collecting invertebrates for their next meal on an island in the Indian Ocean. Thus, reliable information on current and past catches are the foundation for understanding fisheries and are crucial baseline data for any attempt to project or predict future catches")
                     )
            ),
            fluidRow(
              column(width = 1),
              column(width = 8, 
-                    tags$h4("What Resources were used to develop the app"),
+                    tags$h4("Sources of Data used to develop the R4FS app"),
                     tags$hr()
              )
            ),
            fluidRow(
              column(width = 1),
              column(width = 8,
-                    tags$b("National Bereau of Statistics: "), tags$a(href="https://www.nbs.go.tz/index.php/en/", "The housing and population censor and Basemaps layers,")," with additional information from the ",tags$a(href="https://worldpop.org/", "Open Spatial Demographic Data and Research."),tags$br(),
-                    tags$b("Ofisi ya Rais - Tawala za Mikoa na Serikali za Mitaa: "), tags$a(href="https://www.tamisemi.go.tz/", "Information and Communication page,"),tags$br(),
-                    tags$b("Tanzania Rural and Urban Roads Agency: "), tags$a(href="https://www.tarura.go.tz/", "News page"),tags$br(),
-                    tags$b("Tanzania Ports Authoity: "), tags$a(href="https://www.ports.go.tz/", "Bandari Kavu reports"),tags$br(),
-                    tags$b("Tanzania Telecommunications Corporation: "), "Mkongo wa Taif ", tags$a(href="https://www.ttcl.co.tz/", "GLaMOR Project"),tags$br(),
+                    tags$b("OpenFisheries: "), tags$a(href="http://www.openfisheries.org/", "The home page,"),tags$br(),
+                    tags$b("Deep Sea Fishing Authority: "), tags$a(href="https://www.dsfa.go.tz/home", "The statistics page,"),tags$br(),
+                    tags$b("Indian Ocean Tuna Commission: "), tags$a(href="https://iotc.org/", "News page"),tags$br(),
                     tags$br()
              )
            ),
@@ -152,8 +150,9 @@ ui = navbarPage(
            fluidRow(
              column(width = 1),
              column(width = 6,
-                    "Masumbuko Semba, The Nelson Mandela African Institution of Science and Technology",tags$br(),
-                    "Nyamisi Peter, University of Dar es Salaam",
+                    tags$b("Masumbuko Semba: "), tags$a(href="https://semba-blog.netlify.app/", "A hinge of fisheries and oceanographical data", "and", tags$a(href = "https://semba.netlify.app/", " A gateway a tools for data analysis in R")),
+                    # "Masumbuko Semba, The Nelson Mandela African Institution of Science and Technology",tags$br(),
+                    # "Nyamisi Peter, University of Dar es Salaam",
                     tags$br(),
              )
            ),
@@ -162,7 +161,7 @@ ui = navbarPage(
              column(width = 8, 
                     tags$h4("Acknowlegements"),
                     tags$hr(),
-                    tags$p("The app was inspired by research into gender bias in preaching, and was created as a user-friendly tool for people writing speeches, sermons or other public addresses who wanted to reflect on potential biases in their texts. The graphs can all be interpreted intuitively, and are accompanied by clear explanatory text that does not require specialist knowledge.")
+                    tags$p("R for fisheries science (R4FS) is a collaborative effort of international organization, private and public institutions and many people who have contributed .....")
              )
            ),
            fluidRow(
@@ -336,7 +335,8 @@ ui = navbarPage(
                     tags$p("A normally distributed sequence of numbers can be created using the qnorm() quantile function.")),
              column(width = 1,
                     numericInput(inputId = "mojalogit", label = "Minimum", value = 1),
-                    numericInput(inputId = "mbililogit", label = "Maximum", value = 20)
+                    numericInput(inputId = "mbililogit", label = "Maximum", value = 20),
+                    numericInput(inputId = 'logis_id', label = "Simulate", value = 100, min = 20, max = 100,step = 20 )
              ),
              column(width = 3,
                     helpText("You obtain a sequence of numbers in vector form ranged from the lowest to the maximum numbers specified"),
@@ -410,8 +410,39 @@ ui = navbarPage(
            
            
            ),
-  tabPanel(title = "Statistics"),
-  ## stock panel ----
+  ## statistical panell ----
+  tabPanel(title = "Statistics",
+           fluidRow(
+             column(width = 1),
+             column(width = 6,
+                    tags$h3("What is Statistics Used for?"),
+                    tags$hr())
+           ),
+           fluidRow(
+             column(width = 1),
+             column(width = 3,
+                    tags$p("Statistics is used in all kinds of science and business applications. Statistics gives us more accurate knowledge which helps us make better decisions. Statistics can focus on making predictions about what will happen in the future. It can also focus on explaining how different things are connected.")
+                    ),
+             column(width = 3,
+                    tags$li("Develop questions"),
+                    tags$li("search Data: collect or use existing"),
+                    tags$li("Explore and Describe Data"),
+                    tags$li("Analyse and Model"),
+                    tags$li("Draw conclusion and Share results"),
+                    tags$p("It is important to keep all three steps in mind for any questions we want more knowledge about.")
+                    ),
+             column(width = 3,
+                    tags$p("Knowing which types of data are available can tell you what kinds of questions you can answer with statistical methods. Knowing which questions you want to answer can help guide what sort of data you need. A lot of data might be available, and knowing what to focus on is important.")
+                    )
+           ),
+           fluidRow(),
+           fluidRow(),
+           fluidRow(),
+           fluidRow(),
+           fluidRow(),
+           fluidRow()
+           ),
+  ## fishstock panel ----
   tabPanel(title = "Stocks",
            fluidRow(),
            fluidRow(
@@ -715,7 +746,7 @@ server = function(input, output, session){
   output$logit_id = renderPrint({
     
     a = input$mojalogit:input$mbililogit
-    b = SSlogis(input = a, Asym = 100, xmid = 10, scal = 1)
+    b = SSlogis(input = a, Asym = input$logis_id, xmid = 10, scal = 1)
     b
        
     
@@ -723,7 +754,7 @@ server = function(input, output, session){
   
   output$logitplot_id = renderPlot({
     a = input$mojalogit:input$mbililogit
-    b = SSlogis(input = a, Asym = 100, xmid = 10, scal = 1)
+    b = SSlogis(input = a, Asym = input$logis_id, xmid = 10, scal = 1)
     
     tb = tibble(a,b)
     
@@ -735,8 +766,8 @@ server = function(input, output, session){
       scale_y_continuous(name = "values",breaks = scales::pretty_breaks())+
       theme(axis.title.x = element_blank())+
       annotate(geom = "text",x = 3.5, y = 10, label = "Initial\n Colonization", color = "darkorchid" )+
-      annotate(geom = "text",x = 13.5, y = 50, label = "High Growth", color = "cyan4" )+
-      annotate(geom = "text",x = 16.5, y = 90, label = "Limit of \nCarrying Capacity", color = "darkorange" )
+      annotate(geom = "text",x = 13.5, y = input$logis_id/2, label = "High Growth", color = "cyan4" )+
+      annotate(geom = "text",x = 16.5, y = input$logis_id - 5, label = "Limit of \nCarrying Capacity", color = "darkorange" )
       
 
   })

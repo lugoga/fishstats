@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>WIO-fish - 4&nbsp; Packages</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./data.html" rel="next">
+<link href="./Rlanguage.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Packages</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./" class="sidebar-logo-link">
+      <img src="./FAO_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">WIO-fish</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/lugoga/ecasData" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rstudio.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started with R and RStudio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Rlanguage.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">R as a Programming Language</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./packages.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Packages</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><strong>Data Entry and Management</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./loadingData.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><strong>Loading Data and Data Cleaning</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sample.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sample Data in R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicFishStats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>Basic Fisheries Statistics</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicFishPlotting.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Plotting Fisheries Data</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./simulate.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simulate Data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./installR.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">R language installation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./installRstudio.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title"><strong>What is RStudio?</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./installPackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Install packages in R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lw.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title"><strong>Weight-Length Relationships</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicstats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title"><strong>Basic Data Manipulations</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./recruitment.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Recruitment and logistic model</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#r-packages-for-fishery-analysis" id="toc-r-packages-for-fishery-analysis" class="nav-link active" data-scroll-target="#r-packages-for-fishery-analysis"> <span class="header-section-number">4.1</span> R Packages for Fishery Analysis</a></li>
+  <li><a href="#packages-of-data" id="toc-packages-of-data" class="nav-link" data-scroll-target="#packages-of-data"> <span class="header-section-number">4.2</span> Packages of Data</a></li>
+  <li><a href="#packages-to-access-online-databases" id="toc-packages-to-access-online-databases" class="nav-link" data-scroll-target="#packages-to-access-online-databases"> <span class="header-section-number">4.3</span> Packages to Access Online Databases</a></li>
+  <li><a href="#packages-for-limnological-data" id="toc-packages-for-limnological-data" class="nav-link" data-scroll-target="#packages-for-limnological-data"> <span class="header-section-number">4.4</span> Packages for Limnological Data</a></li>
+  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources"> <span class="header-section-number">4.5</span> Additional Resources</a></li>
+  <li><a href="#helpful-resources" id="toc-helpful-resources" class="nav-link" data-scroll-target="#helpful-resources"> <span class="header-section-number">4.6</span> Helpful Resources</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Packages</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>Packages are groups of functions that are designed to excel at certain tasks (making plots, standardizing dates, reading/writing large data files, etc.). Many useful packages come standard with R when you download it, however, many more are available online.</p>
+<p>To install a new package, click on the “Install” button located under the “Packages” tab in RStudio. This will open a pop-up where you can search for and install R packages hosted on CRAN. Alternatively, if you know the name of the package you want to install, you can run <code>install.packages('package_name')</code>.</p>
+<p><img src="https://sfg-ucsb.github.io/fishery-manageR/images/package_install.png" class="img-fluid"></p>
+<p>Once installed, the packages you need for an analysis are loaded by the <code>library('package_name')</code> function.</p>
+<p>The following packages are commonly used by UCSB for fisheries analyses:</p>
+<ul>
+<li><p><strong>tidyverse</strong> - Contains numerous seperate packages for loading and writing data files (<strong>readr</strong>), data processing (<strong>dplyr</strong> &amp; <strong>tidyr</strong>), plotting (<strong>ggplot2</strong>), and functional programming (<strong>purrr</strong>)</p></li>
+<li><p><strong>readxl</strong> - Reads and writes data from/to Excel workbooks, including workbooks with multiple worksheets</p></li>
+<li><p><strong>lubridate</strong> - Helps R handle dates in an efficient and easy-to-understand manner</p></li>
+<li><p><strong>sf</strong>, <strong>rgeos</strong>, <strong>rgdal</strong> - Key packages for spatial analyses similar to those done with ArcGIS</p></li>
+<li><p><strong>rmarkdown</strong> - Uses R code to author reproducible reports, presentations, and websites</p></li>
+<li><p><strong>shiny</strong> - Creates web applications using R</p></li>
+</ul>
+<section id="r-packages-for-fishery-analysis" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="r-packages-for-fishery-analysis"><span class="header-section-number">4.1</span> R Packages for Fishery Analysis</h2>
+<p>Fortunately, there are already numerous R <a href="https://sfg-ucsb.github.io/fishery-manageR/packages-1.html#packages-1">packages</a> available that are specifically designed for different types of fisheries analyses. The following four packages all contain very useful functions, and numerous other packages are available. Before jumping into these packages, however, we recommend you become familiar with R and more basic analyses first. Also, keep in mind that <strong>R is an open-source language</strong>, which means that <em>anyone</em> can submit packages. You should therefore always be sure to read the package documentation and double check your work to be sure things are performing as expected.</p>
+<ul>
+<li><p><a href="https://cran.r-project.org/web/packages/TropFishR/vignettes/tutorial.html">TropFishR</a> - Fish stock assessment methods and fisheries models based on the FAO Manual “Introduction to tropical fish stock assessment” by P. Sparre and S.C. Venema. Focus is the analysis of length-frequency data and data-poor fisheries.</p></li>
+<li><p><a href="http://www.datalimitedtoolkit.org/">DLMTool</a> - Implementation of management procedures for data-limited fisheries</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/LBSPR/vignettes/LBSPR.html">LBSPR</a> - Functions to run the Length-Based Spawning Potential Ratio (LBSPR) method. The LBSPR package can be used in two ways: 1) simulating the expected length composition, growth curve, and SPR and yield curves using the LBSPR model and 2) fitting to empirical length data to provide an estimate of the spawning potential ratio (SPR).</p></li>
+<li><p><a href="https://www.rdocumentation.org/packages/fishmethods/versions/1.10-2">fishmethods</a> - Fishery science methods and models from published literature</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/rfisheries/index.html">rfisheries</a>— This package provides programmatic access to the <a href="http://openfisheries.org/">openfisheries</a> <a href="http://openfisheries.org/api-info">API</a>. Open Fisheries is a platform that aggregates global fishery data and currently offers global fish capture landings from 1950 onwards (more data coming soon). Read more about that effort <a href="http://openfisheries.org/about">here</a>.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/sizeMat/index.html">sizeMat</a>—a package that allows to estimate morphometric and gonadal size at sexual maturity for organisms, usually fish and invertebrates. It includes methods for classification based on relative growth (using principal components analysis, hierarchical clustering, discriminant analysis), logistic regression (Frequentist or Bayes), parameters estimation and some basic plots.</p></li>
+<li><p><a href="https://fishr-core-team.github.io/FSA/">FSA</a>—This package provides R functions to conduct typical introductory fisheries analyses. Example analyses that use <strong>FSA</strong> can be found in the <a href="http://derekogle.com/IFAR/">Introductory Fisheries Analyses with R book</a> (<em>see note below</em>) and on <a href="http://derekogle.com/fishR/examples/">the <em>Examples</em> page</a> of the <a href="http://derekogle.com/fishR/">fishR website</a>.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/CatDyn/index.html">CatDyn</a> Fishery Stock Assessment by Catch Dynamics Models. Based on fishery Catch Dynamics instead of fish Population Dynamics (hence CatDyn) and using high-frequency or medium-frequency catch in biomass or numbers, fishing nominal effort, and mean fish body weight by time step, from one or two fishing fleets, estimate stock abundance, natural mortality rate, and fishing operational parameters. It includes methods for data organization, plotting standard exploratory and analytical plots, predictions, for 100 types of models of increasing complexity, and 72 likelihood models for the data.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/cuttlefish.model/index.html">cuttlefish.model</a> – <em>Perform LPUE standardization and stock assessment of the English Channel cuttlefish stock using a two-stage biomass model</em></p></li>
+<li><p><a href="http://usgs-r.github.io/EGRET/">EGRET</a> – <em>An R-package for the analysis of long-term changes in water quality and streamflow, including the water-quality method Weighted Regressions on Time, Discharge, and Season</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/fecR/index.html">fecR</a> – <em>Calculates fishing effort following the DG MARE Ad-Hoc Workshops on Transversal Variables in Zagreb (2015) and Nicosia (2016)</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/FESta/index.html">FESta</a>: <em>Fishing effort standardization</em></p></li>
+<li><p><a href="https://github.com/droglenc/FSAWs">FSAWs</a> – <em>construct and validate standard weight (Ws) equations</em></p>
+<ul>
+<li><p><a href="https://cran.r-project.org/web/packages/fishMod/index.html">fishMod</a> – <em>fits models to catch and effort data</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/fishmove/index.html">fishmove</a> – <em>predict fish movement parameters</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/fishualize/index.html">fishualize</a>: <em>Color palettes based on fish species</em></p></li>
+<li><p><a href="http://hafroassmt.r-forge.r-project.org/">hafroAssmt</a> – <em>fisheries stock assessment at Hafro, the Marine Research Institute in Iceland</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/kobe/index.html">kobe</a> – <em>methods for summarising results from stock assessments and Management Strategy Evaluations in the Kobe format</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/LBSPR/index.html">LBSPR: Length-Based Spawning Potential Ratio</a> – <em>Simulate expected equilibrium length composition, YPR, and SPR using the LBSPR model. Fit the LBSPR model to length data to estimate selectivity, relative fishing mortality, and spawning potential ratio for data-limited fisheries.</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/LeMaRns/index.html">LeMaRns</a> – Set-up, run, and explore the outputs of the Length-based Multi-species model (LeMans; <a href="https://doi.org/10.1139/f06-039">Hall et al.&nbsp;2006</a>), focused on the marine environment. <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0227767">Introductory publication is here</a>.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/mapplots/index.html">mapplots</a> – *Create simple maps; add sub-plots like pie plots to a map or any other plot; format, plot and export gridded data</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/marindicators/index.html">marindicators</a>: <em>Functions to calculate indicators for four marine ecosystem attributes (Biodiversity, Ecosystem Structure and Functioning, Ecosystem Stability and Resistance to Perturbations, Resource Potential) and one marine ecosystem pressure (Fishing Pressure) from fishery independent trawl survey data and commercial landings data.</em></p></li>
+<li><p><a href="http://ms.mcmaster.ca/peter/mix/mix.html">mixdist</a> – <em>fit mixture distributions — e.g., possibly separating age-classes from a length frequency</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/mizer/index.html">mizer</a> – <em>multispecies, trait based and community size spectrum ecological models, focused on the marine environment</em> See <a href="https://cran.r-project.org/web/packages/mizer/vignettes/mizer_vignette.pdf">Introduction to mizer</a></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/MQMF/index.html">MQMF</a>: <em>Companion for “Using R for Modelling and Quantitative Methods in Fisheries” book</em></p></li>
+<li><p><a href="https://github.com/kacurtis/ObsCovgTools">ObsCovgTools</a> – Estimates minimum fisheries observer coverage required to achieve a specific objective. <a href="https://kacurtis.shinyapps.io/obscov/">Related Shiny app is here</a>.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/oceanmap/index.html">oceanmap</a> – <em>Plotting toolbox for 2D oceanographic data</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/optistock/index.html">optistock</a> – Functions that aid calculating the optimum time to stock hatchery-reared fish into a body of water given the growth, mortality, and cost of raising a particular number of individuals to a certain length.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/PBSmapping/">PBSmapping</a> – <em>two-dimensional plotting features similar to those commonly available in a Geographic Information System</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/PBSmodelling/index.html">PBSmodelling</a> – <em>facilitates the design, testing, and operation of computer models; focused on tools that make it easy to construct and edit a customized graphical user interface</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/RchivalTag/index.html">RchivalTag</a> – <em>functions to generate, access and analyze standard data products from archival tagging data</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/rct3/index.html">rct3</a> – Predict fish year-class strength by calibration regression analysis of multiple recruitment index series.</p></li>
+<li><p><a href="https://github.com/r4ss/r4ss">r4ss</a> – <em>analyze and plot the output from Stock Synthesis version 3, a fisheries stock assessment model written in ADMB</em></p></li>
+<li><p><a href="https://fishr-core-team.github.io/RFishBC/">RFishBC</a> – <em>helps fisheries scientists collect growth data from calcified structures and back-calculate estimated lengths at previous ages</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/rfishdraw/index.html">rfishdraw</a> – Automatic generation of fish drawings based on JavaScript library.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/scape/">scape</a> – <em>import and plot results from statistical catch-at-age models; generally used to connect with ADMB.</em></p></li>
+<li><p><a href="https://www.stat.auckland.ac.nz/~millar/selectware/code.html">select</a> – <em>a flexible and user-extendable framework for size-selectivity via the SELECT model</em></p></li>
+<li><p><a href="https://github.com/lisalibungan/shapeR">shapeR</a> – <em>study otolith shape variation among fish populations</em></p></li>
+<li><p><a href="http://simecol.r-forge.r-project.org/">simecol</a> – <em>implementation of dynamic simulation models</em></p></li>
+<li><p><a href="http://cran.r-project.org/web/packages/skewtools/">skewtools</a> – <em>estimation of growth models parameters using the robust ECME method via heteroscedastic nonlinear regression growth model with scale mixture of skew-normal distributions</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/ss3sim/index.html">ss3sim</a> – <em>framework for fisheries stock assessment simulation testing with Stock Synthesis 3</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/smartR/index.html">smartR</a>: <em>Spatial management and assessment of demersal resources for trawl fisheries</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/stacomiR/index.html">stacomiR</a> – <em>Graphical outputs and treatment for a database of fish pass monitoring</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/swfscDAS/index.html">swfscDAS</a>: <em>Southwest Fisheries Science Center shipboard DAS data processing</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/swfscMisc/index.html">swfscMisc</a> – <em>Collection of conversion, analytical, geodesic, mapping, and plotting functions used by the Southwest Fisheries Science Center</em></p></li>
+<li><p><a href="http://usgs-r.github.io/toxEval/">toxEval</a> – <em>functions to analyze, visualize, and organize measured concentration data as it relates to toxicity forecasting or other user-selected chemical-biological interaction benchmark data such as water quality criteria</em></p></li>
+<li><p><a href="https://cran.r-project.org/package=tRophicPosition">tRophicPosition</a> – <em>Bayesian estimation of trophic position from consumer stable isotope ratios</em></p></li>
+<li><p><a href="http://derekogle.com/fishR/packages">VAST</a> – <em>estimate spatial variation in density using spatially referenced data, with the goal of habitat associations (correlations among species and with habitat) and estimating total abundance for a target species in one or more years</em></p></li>
+<li><p><a href="http://www.vmsbase.org/">vmsbase</a> – <em>vessel monitoring system and logbook data management and analysis</em></p></li>
+<li><p><a href="https://cran.r-project.org/contrib/extra/x2r/00ReadMe-X2R.html">X2R with FishGraph</a> – <em>import the structured output from a given numerical model written in a compiled language (e.g., ADMB, fortran) into R for postprocessing (graphing, further analysis)</em></p></li>
+<li><p><a href="https://poissonconsulting.github.io/ypr/index.html">ypr</a> – <em>yield-per-recruit analysis</em></p></li>
+</ul></li>
+</ul>
+<p>All these packages are available on CRAN and can be downloaded directly in RStudio by running the following command:</p>
+<pre><code>    install.packages(c('TropFishR','DLMTool', 'LBSPR', 'fishmethods'))</code></pre>
+</section>
+<section id="packages-of-data" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="packages-of-data"><span class="header-section-number">4.2</span> Packages of Data</h2>
+<ul>
+<li><p><a href="https://github.com/fishR-core-team/FSAdata#readme">FSAdata: Data for FSA</a> – <em>Collection of many fisheries-related data sets</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/fishdata/index.html">fishdata</a> – <em>Four datasets (fish size and per-day growth history) of migratory fish, from 2015-2016, in the Wellington region of New Zealand</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/fishkirkko2015/index.html">fishkirkko2015</a> – <em>Length and weight measurements of fish species at Kirkkojarvi Lake, Finland</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/fishbc/index.html">fishbc</a>: <em>Raw and curated data on the codes, classification, and conservation status of freshwater fishes in British Columbia</em></p></li>
+</ul>
+</section>
+<section id="packages-to-access-online-databases" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="packages-to-access-online-databases"><span class="header-section-number">4.3</span> Packages to Access Online Databases</h2>
+<ul>
+<li><p><a href="http://www.rforge.net/DATRAS/Tutorial.html">DATRAS</a> – <em>read and manipulate trawl survey data from the <a href="http://www.ices.dk/marine-data/data-portals/Pages/DATRAS.aspx">DATRAS database</a></em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/fishtree/index.html">fishtree</a>: <em>interface to the Fish Tree of Life API to download taxonomies, phylogenies, fossil calibrations, and diversification rate information for ray-finned fishes</em></p></li>
+<li><p><a href="https://github.com/GLEON/LTERdata">LTERdata</a> – <em>functions for retrieving NTL LTER data</em></p></li>
+<li><p><a href="https://github.com/seananderson/ramlegacy">ramlegacy</a> – <em>Download, import, convert, and cache the RAM Legacy Stock Assessment Database</em></p></li>
+<li><p><a href="https://github.com/ropensci/rfishbase">rfishbase</a> – <em>a programmatic interface to <a href="http://fishbase.org/">fishbase.org</a></em></p></li>
+<li><p><a href="https://ropensci.org/tutorials/rfisheries_tutorial.html">rfisheries</a> – <em>a programmatic interface to <a href="http://openfisheries.org/">OpenFisheries.org</a></em></p></li>
+</ul>
+</section>
+<section id="packages-for-limnological-data" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="packages-for-limnological-data"><span class="header-section-number">4.4</span> Packages for Limnological Data</h2>
+<ul>
+<li><p><a href="https://github.com/GLEON/GLMr">GLMr</a> – <em>the <a href="http://aed.see.uwa.edu.au/research/models/GLM/">General Lake Model</a> in R</em></p></li>
+<li><p><a href="https://github.com/USGS-R/glmtools">glmtools</a> – <em>Tools for interacting with the <a href="http://aed.see.uwa.edu.au/research/models/GLM/">General Lake Model</a> in R</em></p></li>
+<li><p><a href="https://github.com/GLEON/LakeMetabolizer">LakeMetabolizer</a> – <em>collection of lake metabolism functions</em></p></li>
+<li><p><a href="https://github.com/GLEON/rLakeAnalyzer">rLakeAnalyzer</a> – <em>standardized methods for calculating common important derived physical features of lakes</em></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/waterData/index.html">waterData</a> – <em>Imports U.S. Geological Survey (USGS) daily hydrologic data from USGS web services, plots the data, addresses some common data problems, and calculates and plots anomalies</em></p></li>
+</ul>
+</section>
+<section id="additional-resources" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="additional-resources"><span class="header-section-number">4.5</span> Additional Resources</h2>
+<p>Throughout this guidebook we provided links to additional useful R resources. We now include all of these resources below for your convenience.</p>
+<ul>
+<li><a href="http://r4ds.had.co.nz/">R for Data Science</a></li>
+<li><a href="http://www.cookbook-r.com/">Cookbook for R</a></li>
+<li><a href="https://www.rstudio.com/resources/cheatsheets/">RStudio Cheat Sheets</a></li>
+<li><a href="http://stat545.com/topics.html">Jenny Bryan’s Stat 545 Course Syllabus</a></li>
+<li><a href="https://www.nceas.ucsb.edu/files/news/ESAdatamng09.pdf">Simple Guidelines for Effective Data Management</a></li>
+<li><a href="http://ucsd.libguides.com/c.php?g=90957&amp;p=585435">Research Data Management</a></li>
+</ul>
+</section>
+<section id="helpful-resources" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="helpful-resources"><span class="header-section-number">4.6</span> Helpful Resources</h2>
+<ul>
+<li><a href="http://stat545.com/block000_r-rstudio-install.html">Jenny Bryan’s Guide to Installing R and RStudio</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Rlanguage.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">R as a Programming Language</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./data.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><strong>Data Entry and Management</strong></span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
